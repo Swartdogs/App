@@ -24,6 +24,14 @@
 
 - (void) stepView:(SDResizeStepperView *)stepView stepperTag:(int)tag newValue:(int)value {
     switch (tag) {
+        case 0: match.StackMax = value;
+            break;
+        case 1: match.TotesScored = value;
+            break;
+        case 2: match.ContainersMax = value;
+            break;
+        case 3: match.ContainersScored = value;
+            break;
         default:;
     }
 }
@@ -95,7 +103,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    TotesMax.ScoreLabel.layer.cornerRadius          = 5.0f;
+    TotesScored.ScoreLabel.layer.cornerRadius       = 5.0f;
+    ContainersMax.ScoreLabel.layer.cornerRadius     = 5.0f;
+    ContainersScored.ScoreLabel.layer.cornerRadius  = 5.0f;
+
+    TotesMax.delegate = self;
+    [TotesMax.minusButton setColor];
+    [TotesMax.plusButton setColor];
+    
+    TotesScored.delegate = self;
+    [TotesScored.minusButton setColor];
+    [TotesScored.plusButton setColor];
+
+    ContainersMax.delegate = self;
+    [ContainersMax.minusButton setColor];
+    [ContainersMax.plusButton setColor];
+
+    ContainersScored.delegate = self;
+    [ContainersScored.minusButton setColor];
+    [ContainersScored.plusButton setColor];
 }
 
 - (void) viewDidUnload {
@@ -117,8 +145,14 @@
     self.navigationItem.titleView = myTitle.view;
     [[myTitle matchLabel] setText:[NSString stringWithFormat:@"Match %d: %d", match.matchNumber, match.teamNumber]];
     
-    [self selectIndex:match.teleTotesFrom fromArray:TotesFromButtons];
-
+    [(SDGradientButton*)[TotesFromButtons objectAtIndex:0] setSelected:(match.teleTotesFrom & 1) == 1];
+    [(SDGradientButton*)[TotesFromButtons objectAtIndex:1] setSelected:(match.teleTotesFrom & 2) == 2];
+    [(SDGradientButton*)[TotesFromButtons objectAtIndex:2] setSelected:(match.teleTotesFrom & 4) == 4];
+    
+    [TotesMax           initStepperValue:match.StackMax Minimum:0 Maximum:6];
+    [TotesScored        initStepperValue:match.TotesScored Minimum:0 Maximum:70];
+    [ContainersScored   initStepperValue:match.ContainersScored Minimum:0 Maximum:7];
+    [ContainersMax      initStepperValue:match.ContainersMax Minimum:0 Maximum:6];
     
     self.navigationController.toolbar.translucent = NO;
     [[self navigationController] setToolbarHidden:NO animated:NO];

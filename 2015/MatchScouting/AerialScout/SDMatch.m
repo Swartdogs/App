@@ -11,7 +11,7 @@
 
 @implementation SDMatch
 
-@synthesize teamNumber, matchNumber, hasViewed, isCompleted, autoRobot, autoContainers, autoTotes, autoHandling, stepContainers, StackMax, TotesScored, ContainersScored, teleTotesFrom, teleNoodles, finalPenalty, finalRobot, finalScore;
+@synthesize teamNumber, matchNumber, hasViewed, isCompleted, autoRobot, autoContainers, autoTotes, autoHandling, stepContainers, StackMax, TotesScored, ContainersScored, ContainersMax, teleTotesFrom, teleNoodles, finalPenalty, finalRobot, finalScore;
 
 - (id) init {
     if (self = [super init]) {
@@ -44,6 +44,7 @@
         self.StackMax              = copy.StackMax;
         self.TotesScored           = copy.TotesScored;
         self.ContainersScored      = copy.ContainersScored;
+        self.ContainersMax         = copy.ContainersMax;
         self.teleTotesFrom         = copy.teleTotesFrom;
         self.teleNoodles           = copy.teleNoodles;
 
@@ -81,6 +82,7 @@
         self.StackMax           = [aDecoder decodeIntForKey:@"StackMax"];
         self.TotesScored        = [aDecoder decodeIntForKey:@"TotesScored"];
         self.ContainersScored   = [aDecoder decodeIntForKey:@"ContainersScored"];
+        self.ContainersMax      = [aDecoder decodeIntForKey:@"ContainersMax"];
         self.teleTotesFrom      = [aDecoder decodeIntForKey:@"teleTotesFrom"];
         self.teleNoodles        = [aDecoder decodeIntForKey:@"teleNoodles"];
 
@@ -118,6 +120,7 @@
     [aCoder encodeInt:StackMax         forKey:@"StackMax"];
     [aCoder encodeInt:TotesScored      forKey:@"TotesScored"];
     [aCoder encodeInt:ContainersScored forKey:@"ContainersScored"];
+    [aCoder encodeInt:ContainersMax    forKey:@"ContainersMax"];
     [aCoder encodeInt:teleTotesFrom    forKey:@"teleTotesFrom"];
     [aCoder encodeInt:teleNoodles      forKey:@"teleNoodles"];
     
@@ -154,6 +157,7 @@
     self.StackMax           = 0;
     self.TotesScored        = 0;
     self.ContainersScored   = 0;
+    self.ContainersMax      = 0;
     self.teleTotesFrom      = 0;
     self.teleNoodles        = 0;
     
@@ -200,6 +204,7 @@
          self.StackMax,
          self.TotesScored,
          self.ContainersScored,
+         self.ContainersMax,
          self.teleTotesFrom,
          self.teleNoodles,
          

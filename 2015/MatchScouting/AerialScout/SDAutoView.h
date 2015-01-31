@@ -3,7 +3,6 @@
 //  RecycleScout
 //
 //  Created by Srinivas Dhanwada on 1/7/14.
-//  Made worse by Seth Harwood 1/27/15.
 //  Copyright (c) 2014 Srinivas Dhanwada. All rights reserved.
 //
 

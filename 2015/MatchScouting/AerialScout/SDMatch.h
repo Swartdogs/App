@@ -32,6 +32,7 @@
 @property (nonatomic) int StackMax;
 @property (nonatomic) int TotesScored;
 @property (nonatomic) int ContainersScored;
+@property (nonatomic) int ContainersMax;
 @property (nonatomic) int teleTotesFrom;
 @property (nonatomic) int teleNoodles;
 
