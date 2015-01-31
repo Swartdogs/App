@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1280" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SDMatchScheduleView">
+            <connections>
+                <outlet property="searchDisplayController" destination="HOD-Xf-XBM" id="exv-XR-yZK"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="44" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <searchBar key="tableHeaderView" contentMode="redraw" showsScopeBar="YES" id="lT8-TO-f9b">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                <scopeButtonTitles>
+                    <string>All</string>
+                    <string>Robot</string>
+                    <string>Match</string>
+                    <string>Time</string>
+                </scopeButtonTitles>
+                <connections>
+                    <outlet property="delegate" destination="-1" id="foU-41-0ii"/>
+                </connections>
+            </searchBar>
+            <connections>
+                <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
+                <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
+            </connections>
+        </tableView>
+        <searchDisplayController id="HOD-Xf-XBM">
+            <connections>
+                <outlet property="delegate" destination="-1" id="Fc1-um-w19"/>
+                <outlet property="searchBar" destination="lT8-TO-f9b" id="eDK-86-0yg"/>
+                <outlet property="searchContentsController" destination="-1" id="Djw-FG-BBh"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="PCC-km-JQ1"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="JdL-bA-Xt1"/>
+            </connections>
+        </searchDisplayController>
+    </objects>
+</document>
