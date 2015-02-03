@@ -144,16 +144,12 @@
     [super viewDidUnload];
 }
 
-
-- (void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
--(void) viewWillAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     if((match.hasViewed & 2) == 0) {
         match.autoContainers = 0;
+        
         match.hasViewed |= 2;
     }
     
@@ -175,8 +171,10 @@
     
     self.navigationController.toolbar.translucent = NO;
     [[self navigationController] setToolbarHidden:NO animated:NO];
+}
 
-
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [[self view] endEditing:YES];
 }
 

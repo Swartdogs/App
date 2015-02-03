@@ -1,6 +1,6 @@
 //
 //  SDFinalView.m
-//  RecycleScout/Users/team525students/Documents/SwartdogsScoutingApp/2015/MatchScouting/AerialScout/SDFinalView.m
+//  RecycleScout
 //
 //  Created by Srinivas Dhanwada on 1/7/14.
 //  Made worse by Seth Harwood 1/27/15.
