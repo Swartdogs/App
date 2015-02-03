@@ -25,6 +25,7 @@
 }
 
 @property (nonatomic, retain) IBOutletCollection(SDGradientButton)NSArray* buildListButtons;
+@property (nonatomic, copy) void (^dismissBlock)(void);
 
 - (IBAction) backgroundTap:(id)sender;
 - (IBAction) buildList:(id)sender;

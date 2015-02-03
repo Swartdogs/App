@@ -9,13 +9,11 @@
 /* Begin PBXBuildFile section */
 		281EF49D18E26F0C000F12B4 /* SDMatchScheduleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281EF49B18E26F0C000F12B4 /* SDMatchScheduleView.m */; };
 		281EF49E18E26F0C000F12B4 /* SDMatchScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281EF49C18E26F0C000F12B4 /* SDMatchScheduleView.xib */; };
-		281EF4A318E26F21000F12B4 /* SDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 281EF4A018E26F21000F12B4 /* SDSearch.m */; };
-		281EF4A418E26F21000F12B4 /* SDSearchStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 281EF4A218E26F21000F12B4 /* SDSearchStore.m */; };
+		2827D0221A81044700E3B014 /* Litter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2827D0211A81044700E3B014 /* Litter.png */; };
 		28780E621A7E3B700040C8B4 /* GrayTote.png in Resources */ = {isa = PBXBuildFile; fileRef = 28780E611A7E3B700040C8B4 /* GrayTote.png */; };
 		28780E641A7E3B800040C8B4 /* RecyclingContainer.png in Resources */ = {isa = PBXBuildFile; fileRef = 28780E631A7E3B800040C8B4 /* RecyclingContainer.png */; };
 		28780E661A7E3B8E0040C8B4 /* YellowTote.png in Resources */ = {isa = PBXBuildFile; fileRef = 28780E651A7E3B8E0040C8B4 /* YellowTote.png */; };
 		28780E681A7E43830040C8B4 /* 2014_525.png in Resources */ = {isa = PBXBuildFile; fileRef = 28780E671A7E43830040C8B4 /* 2014_525.png */; };
-		D72E4C20188F18D500C29F27 /* Aerial About Page1.png in Resources */ = {isa = PBXBuildFile; fileRef = D72E4C1F188F18D500C29F27 /* Aerial About Page1.png */; };
 		D72E4C24188F230700C29F27 /* AerialScoutLaunch640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = D72E4C23188F230700C29F27 /* AerialScoutLaunch640x1136.png */; };
 		D72E4C26188F244700C29F27 /* AerialScoutIcon120.png in Resources */ = {isa = PBXBuildFile; fileRef = D72E4C25188F244700C29F27 /* AerialScoutIcon120.png */; };
 		D75B925F187B908200310C35 /* SDMatchSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D75B925D187B908200310C35 /* SDMatchSummaryView.m */; };
@@ -103,15 +101,11 @@
 		281EF49A18E26F0C000F12B4 /* SDMatchScheduleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMatchScheduleView.h; sourceTree = "<group>"; };
 		281EF49B18E26F0C000F12B4 /* SDMatchScheduleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMatchScheduleView.m; sourceTree = "<group>"; };
 		281EF49C18E26F0C000F12B4 /* SDMatchScheduleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SDMatchScheduleView.xib; sourceTree = "<group>"; };
-		281EF49F18E26F21000F12B4 /* SDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSearch.h; sourceTree = "<group>"; };
-		281EF4A018E26F21000F12B4 /* SDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSearch.m; sourceTree = "<group>"; };
-		281EF4A118E26F21000F12B4 /* SDSearchStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSearchStore.h; sourceTree = "<group>"; };
-		281EF4A218E26F21000F12B4 /* SDSearchStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSearchStore.m; sourceTree = "<group>"; };
+		2827D0211A81044700E3B014 /* Litter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Litter.png; sourceTree = "<group>"; };
 		28780E611A7E3B700040C8B4 /* GrayTote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GrayTote.png; sourceTree = "<group>"; };
 		28780E631A7E3B800040C8B4 /* RecyclingContainer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecyclingContainer.png; sourceTree = "<group>"; };
 		28780E651A7E3B8E0040C8B4 /* YellowTote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTote.png; sourceTree = "<group>"; };
 		28780E671A7E43830040C8B4 /* 2014_525.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2014_525.png; sourceTree = "<group>"; };
-		D72E4C1F188F18D500C29F27 /* Aerial About Page1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Aerial About Page1.png"; sourceTree = "<group>"; };
 		D72E4C23188F230700C29F27 /* AerialScoutLaunch640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AerialScoutLaunch640x1136.png; sourceTree = "<group>"; };
 		D72E4C25188F244700C29F27 /* AerialScoutIcon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AerialScoutIcon120.png; sourceTree = "<group>"; };
 		D75B925C187B908200310C35 /* SDMatchSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMatchSummaryView.h; sourceTree = "<group>"; };
@@ -248,6 +242,7 @@
 		28780E601A7E3A990040C8B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2827D0211A81044700E3B014 /* Litter.png */,
 				28780E671A7E43830040C8B4 /* 2014_525.png */,
 				28780E651A7E3B8E0040C8B4 /* YellowTote.png */,
 				28780E631A7E3B800040C8B4 /* RecyclingContainer.png */,
@@ -259,10 +254,6 @@
 		D75BE896187E861100F7D87B /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				281EF49F18E26F21000F12B4 /* SDSearch.h */,
-				281EF4A018E26F21000F12B4 /* SDSearch.m */,
-				281EF4A118E26F21000F12B4 /* SDSearchStore.h */,
-				281EF4A218E26F21000F12B4 /* SDSearchStore.m */,
 				281EF49A18E26F0C000F12B4 /* SDMatchScheduleView.h */,
 				281EF49B18E26F0C000F12B4 /* SDMatchScheduleView.m */,
 				281EF49C18E26F0C000F12B4 /* SDMatchScheduleView.xib */,
@@ -392,7 +383,6 @@
 				D78644C0187B157600089901 /* Images.xcassets */,
 				D7B2DA601890360D0029A7F9 /* AppIcon */,
 				D7B2DA7918903A0E0029A7F9 /* LaunchImage */,
-				D72E4C1F188F18D500C29F27 /* Aerial About Page1.png */,
 				D7FF730E189A16AF00A23635 /* Aerial About Page.png */,
 				D78976F61880909D00207CEC /* black-checkmark.png */,
 				D78644BD187B157600089901 /* SDAppDelegate.h */,
@@ -571,6 +561,7 @@
 				D7B9C10D18834863007E5940 /* SDResizeStepperView.xib in Resources */,
 				D75B9268187BDD7E00310C35 /* SDTeamMatchView.xib in Resources */,
 				D7EB07B418904756009DC3B0 /* AerialScoutLaunchImage768x1004.png in Resources */,
+				2827D0221A81044700E3B014 /* Litter.png in Resources */,
 				D7B2DA6A189036230029A7F9 /* AerialScoutIcon57.png in Resources */,
 				D77588D4187DD7AE00D2D81D /* SDScheduleCell.xib in Resources */,
 				D7B2DA8118903BE80029A7F9 /* AerialScoutLaunchImage1536x2048.png in Resources */,
@@ -589,7 +580,6 @@
 				D7B2DA7D18903A1E0029A7F9 /* AerialScoutLaunchImage640x960.png in Resources */,
 				D7EB07B8189047EE009DC3B0 /* AerialScoutLaunchImage1024x748.png in Resources */,
 				D77588DC187DDC3E00D2D81D /* SDScheduleToolsView.xib in Resources */,
-				D72E4C20188F18D500C29F27 /* Aerial About Page1.png in Resources */,
 				D75B9260187B908200310C35 /* SDMatchSummaryView.xib in Resources */,
 				D7B2DA6C1890368F0029A7F9 /* AerialScoutIcon40.png in Resources */,
 				D7C7961E18DC095B00658581 /* red2Assist.png in Resources */,
@@ -640,9 +630,7 @@
 				D779134B187B43F1009C528B /* SDMatchStore.m in Sources */,
 				D77588D2187DD6EC00D2D81D /* SDScheduleCell.m in Sources */,
 				D7791358187B4C79009C528B /* SDMatchViewController.m in Sources */,
-				281EF4A418E26F21000F12B4 /* SDSearchStore.m in Sources */,
 				281EF49D18E26F0C000F12B4 /* SDMatchScheduleView.m in Sources */,
-				281EF4A318E26F21000F12B4 /* SDSearch.m in Sources */,
 				D75B925F187B908200310C35 /* SDMatchSummaryView.m in Sources */,
 				D75B9267187BDD7E00310C35 /* SDTeamMatchView.m in Sources */,
 				D779135C187B6698009C528B /* SDTitleView.m in Sources */,

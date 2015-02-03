@@ -32,6 +32,7 @@
 
 @synthesize buildListButtons;
 @synthesize urlConnection;
+@synthesize dismissBlock;
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag == 1) {
@@ -396,7 +397,7 @@
 }
 
 - (IBAction) quitEdit:(id)sender {
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissBlock];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {

@@ -14,43 +14,62 @@
 #import "SDScheduleStore.h"
 #import "SDEventStore.h"
 #import "SDMatchStore.h"
-#import "SDSearchStore.h"
-#import "SDSearch.h"
 
 @interface SDMatchScheduleView () {
     NSMutableArray* searchNumbers;
     NSMutableArray* searchMatchItems;
-    SDSearch* searchItem;
-    BOOL displayResults;
+    NSMutableArray* teamList;
+    BOOL            displayResults;
 }
 
 @property (nonatomic) NSMutableArray* searchResults;
 
+- (void) buildTeamList;
+- (bool) isNewTeam:(int)team inList:(NSMutableArray*)list;
 - (void) navButtons;
-- (void) searchSchedule;
+- (void) searchSchedule:(int)teamNumber;
 
 @end
 
 @implementation SDMatchScheduleView
 
+- (void) buildTeamList {
+    NSMutableArray* list = [[NSMutableArray alloc] initWithCapacity:120];
+    NSArray* schedules = [[SDScheduleStore sharedStore] allSchedules];
+    
+    for (SDSchedule* schedule in schedules) {
+        if ([self isNewTeam:schedule.teamBlue1 inList:list]) [list addObject:[NSNumber numberWithInt:schedule.teamBlue1]];
+        if ([self isNewTeam:schedule.teamBlue2 inList:list]) [list addObject:[NSNumber numberWithInt:schedule.teamBlue2]];
+        if ([self isNewTeam:schedule.teamBlue3 inList:list]) [list addObject:[NSNumber numberWithInt:schedule.teamBlue3]];
+        if ([self isNewTeam:schedule.teamRed1  inList:list]) [list addObject:[NSNumber numberWithInt:schedule.teamRed1]];
+        if ([self isNewTeam:schedule.teamRed2  inList:list]) [list addObject:[NSNumber numberWithInt:schedule.teamRed2]];
+        if ([self isNewTeam:schedule.teamRed3  inList:list]) [list addObject:[NSNumber numberWithInt:schedule.teamRed3]];
+    }
+    
+    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+    [list sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
+    
+    [teamList removeAllObjects];
+    
+    for (NSNumber* teamNumber in list) {
+        [teamList addObject:[NSString stringWithFormat:@"%d", [teamNumber intValue]]];
+    }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
 - (void) dismissSchedule:(id)sender {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) showTools:(id)sender {
-    SDScheduleToolsView* toolsView = [[SDScheduleToolsView alloc] init];
-    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:toolsView];
-    
-    if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [[navController navigationBar] setTintColor:[UIColor whiteColor]];
-        [[navController navigationBar] setBarTintColor:[UIColor orangeColor]];
-    } else {
-        [[navController navigationBar] setTintColor:[UIColor orangeColor]];
+- (bool) isNewTeam:(int)team inList:(NSMutableArray *)list {
+    for (NSString* number in list) {
+        if ([number intValue] == team) return NO;
     }
-    
-    navController.navigationBar.translucent = NO;
-    
-    [self presentViewController:navController animated:YES completion:nil];
+    return YES;
 }
 
 - (void) navButtons {
@@ -67,70 +86,68 @@
     
 }
 
-- (void) searchSchedule {
-//    int searchNumber;
+- (void) searchSchedule:(int)teamNumber {
     [searchMatchItems removeAllObjects];
     [searchNumbers removeAllObjects];
     
     NSArray* allScheduleItems = [[SDScheduleStore sharedStore] allSchedules];
     
     for(SDSchedule* item in allScheduleItems) {
-        NSNumberFormatter* numFormat = [[NSNumberFormatter alloc] init];
-        [numFormat setNumberStyle:NSNumberFormatterNoStyle];
-        
-        int number = [[numFormat numberFromString:searchItem.name] intValue];
-    
-        if(number == item.teamRed1) {
+        if(teamNumber == item.teamRed1) {
             [searchMatchItems addObject:item];
-//            searchNumber = 1;
             [searchNumbers addObject:[NSNumber numberWithInt:1]];
-        } else if(number == item.teamRed2) {
+        } else if(teamNumber == item.teamRed2) {
             [searchMatchItems addObject:item];
-//            searchNumber = 2;
             [searchNumbers addObject:[NSNumber numberWithInt:2]];
-        } else if(number == item.teamRed3) {
+        } else if(teamNumber == item.teamRed3) {
             [searchMatchItems addObject:item];
-//            searchNumber = 3;
             [searchNumbers addObject:[NSNumber numberWithInt:3]];
-        } else if(number == item.teamBlue1) {
+        } else if(teamNumber == item.teamBlue1) {
             [searchMatchItems addObject:item];
-//            searchNumber = 4;
             [searchNumbers addObject:[NSNumber numberWithInt:4]];
-        } else if(number == item.teamBlue2) {
+        } else if(teamNumber == item.teamBlue2) {
             [searchMatchItems addObject:item];
-//            searchNumber = 5;
             [searchNumbers addObject:[NSNumber numberWithInt:5]];
-        } else if(number == item.teamBlue3) {
+        } else if(teamNumber == item.teamBlue3) {
             [searchMatchItems addObject:item];
-//            searchNumber = 6;
             [searchNumbers addObject:[NSNumber numberWithInt:6]];
         }
     }
 }
 
+- (void) showTools:(id)sender {
+    SDScheduleToolsView* toolsView = [[SDScheduleToolsView alloc] init];
+    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:toolsView];
+    
+    if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [[navController navigationBar] setTintColor:[UIColor whiteColor]];
+        [[navController navigationBar] setBarTintColor:[UIColor orangeColor]];
+    } else {
+        [[navController navigationBar] setTintColor:[UIColor orangeColor]];
+    }
+    
+    navController.navigationBar.translucent = NO;
+    
+    [toolsView setDismissBlock:^{
+        displayResults = NO;
+        self.searchDisplayController.searchBar.text = @"";
+        [self.tableView reloadData];
+    }];
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.searchResults = [NSMutableArray arrayWithCapacity:120];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    self.searchResults = [NSMutableArray arrayWithCapacity:[[SDSearchStore sharedStore].all count]];
-    
-    searchMatchItems = [[NSMutableArray alloc] init];
-    searchNumbers = [[NSMutableArray alloc] init];
+    searchMatchItems =  [[NSMutableArray alloc] init];
+    searchNumbers =     [[NSMutableArray alloc] init];
+    teamList =          [[NSMutableArray alloc] initWithCapacity:120];
     displayResults = NO;
-    
-//    NSMutableArray* scopeButtonTitles = [[NSMutableArray alloc] init];
-//    [scopeButtonTitles addObject:@"All"];
-//    [scopeButtonTitles addObject:@"Robots"];
-//    [scopeButtonTitles addObject:@"Matches"];
-//    [scopeButtonTitles addObject:@"Times"];
-//    
-//    self.searchDisplayController.searchBar.scopeButtonTitles = scopeButtonTitles;
     
     UINib* nib = [UINib nibWithNibName:@"SDScheduleCell" bundle:nil];
     
@@ -142,6 +159,11 @@
 }
 
 - (void) viewDidUnload {
+    searchMatchItems = nil;
+    searchNumbers = nil;
+    self.searchResults = nil;
+    teamList = nil;
+    
     [super viewDidUnload];
 }
 
@@ -154,15 +176,9 @@
     [[myTitle matchLabel] setText:@"Match Schedule"];
     
     self.schedule = [[SDScheduleStore sharedStore] allSchedules];
-    [[SDSearchStore sharedStore] importSearchItems];
+    [self buildTeamList];
     
     [self.tableView reloadData];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -171,9 +187,8 @@
 {
     // Return the number of sections.
     if(tableView == self.searchDisplayController.searchResultsTableView) {
-        NSArray* sections = [[SDSearchStore sharedStore] order];
-//        return 1;
-        return [sections count];
+        if ([self.searchResults count] > 0) return 1;
+        return 0;
     } else {
         return 1;
     }
@@ -181,11 +196,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     if(tableView == self.searchDisplayController.searchResultsTableView) {
-        NSArray* sections = [[SDSearchStore sharedStore] order];
-        return [[sections objectAtIndex:section] count];
-        
+        return [self.searchResults count];
     } else if(displayResults) {
         return [searchMatchItems count];
     } else {
@@ -196,8 +208,6 @@
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         return @"";
-        NSArray* sectionNames = [[SDSearchStore sharedStore] sectionNames];
-        return (NSString*)[sectionNames objectAtIndex:section];
     } else {
         NSString* eventTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutEventPrefKey"];
         return [NSString stringWithFormat:@"%@", [eventTitle uppercaseString]];
@@ -210,15 +220,15 @@
     static NSString* cellIdentifier = @"SearchCell";
     
     if(tableView == self.searchDisplayController.searchResultsTableView) {
-        NSArray* sections = [[SDSearchStore sharedStore] order];
-        SDSearch* search = [[sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        NSString* teamNumber = [self.searchResults objectAtIndex:indexPath.row];
+        
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
         if(cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-        
-        cell.textLabel.text = search.name;
-        cell.detailTextLabel.text = search.type;
+
+        cell.textLabel.text = teamNumber;
         
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         
@@ -285,12 +295,6 @@
                     [[cell blue3Label] setText:[NSString stringWithFormat:@"%d", cellSchedule.teamBlue3]];
                     [cell blue3Label].backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
                     break;
-//                case 7:
-//                    [cell matchNumberLabel].backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
-//                    break;
-//                case 8:
-//                    [cell matchTimeLabel].backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
-//                    break;
                 default:
                     break;
             }
@@ -337,84 +341,38 @@
     }
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(tableView == self.searchDisplayController.searchResultsTableView) {
+        [self.searchDisplayController setActive:NO animated:YES];
+        displayResults = YES;
+
+        int searchIndex = [[self.searchResults objectAtIndex:indexPath.row] intValue];
+        self.searchDisplayController.searchBar.text = [NSString stringWithFormat:@"%i", searchIndex];
+        [self searchSchedule:searchIndex];
+
+        [self.tableView reloadData];
+    }
+}
+
 #pragma mark - Content Filtering
 
 - (void) updateFilteredContentForSearchString:(NSString*)searchString searchType:(NSString*)searchType {
+    NSArray* results = [teamList filteredArrayUsingPredicate:
+                       [NSPredicate predicateWithFormat:@"self contains[cd] %@", searchString]];
     
-    NSLog(@"UpdateFilteredContent searchString=%@", searchString);
-    
-    self.searchResults = [[SDSearchStore sharedStore].all mutableCopy];
-    
-    NSString* strippedStr = [searchString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    NSArray* searchItems = nil;
-    if(strippedStr.length > 0) {
-        searchItems = [strippedStr componentsSeparatedByString:@" "];
-    }
-    
-    NSMutableArray* andMatchPredicates = [NSMutableArray array];
-    
-    for(NSString* searchString in searchItems) {
-        NSExpression* lhs = [NSExpression expressionForKeyPath:@"name"];
-        NSExpression* rhs = [NSExpression expressionForConstantValue:searchString];
-        NSPredicate* finalPredicate = [NSComparisonPredicate predicateWithLeftExpression:lhs
-                                                                         rightExpression:rhs modifier:
-                                       NSDirectPredicateModifier type:NSContainsPredicateOperatorType
-                                                                                 options:NSCaseInsensitivePredicateOption];
-        
-        [andMatchPredicates addObject:finalPredicate];
-    }
-    
-    NSCompoundPredicate* finalCompoundPredicate = nil;
-    
-    NSLog(@"searchType=%@", searchType);
-    
-    if(searchType != nil) {
-        if(andMatchPredicates.count > 0) {
-            NSCompoundPredicate* compPredicate1 = (NSCompoundPredicate*)[NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
-            NSPredicate* compPredicate2 = [NSPredicate predicateWithFormat:@"(SELF.type == %@)", searchType];
-            
-            finalCompoundPredicate = (NSCompoundPredicate*)[NSCompoundPredicate andPredicateWithSubpredicates:@[compPredicate1, compPredicate2]];
-        } else {
-            finalCompoundPredicate = (NSCompoundPredicate*)[NSPredicate predicateWithFormat:@"(SELF.type == %@)", searchType];
-        }
-    } else {
-        finalCompoundPredicate = (NSCompoundPredicate*)[NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
-    }
-    
-    self.searchResults = [[self.searchResults filteredArrayUsingPredicate:finalCompoundPredicate] mutableCopy];
+    self.searchResults = [results mutableCopy];
 }
 
 #pragma mark - UISearchDisplayDelegate
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    
-//    NSString* scope;
-    
-//    NSInteger selectedScopeButtonIndex = [self.searchDisplayController.searchBar selectedScopeButtonIndex];
-//    scope = (selectedScopeButtonIndex == 1) ? @"Robot" :
-//            (selectedScopeButtonIndex == 2) ? @"Match" :
-//            (selectedScopeButtonIndex == 3) ? @"Time":
-//                                              nil;
-//    [self updateFilteredContentForSearchString:searchString searchType:scope];
-    
     [self updateFilteredContentForSearchString:searchString searchType:nil];
-    [[SDSearchStore sharedStore] filterArray:self.searchResults];
     return YES;
 }
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
     NSString* searchString = [self.searchDisplayController.searchBar text];
-//    NSString* scope;
-//    
-//    scope = (searchOption == 1) ? @"Robot" :
-//            (searchOption == 2) ? @"Match" :
-//            (searchOption == 3) ? @"Time" : nil;
-//    
-//    [self updateFilteredContentForSearchString:searchString searchType:scope];
-
     [self updateFilteredContentForSearchString:searchString searchType:nil];
-    [[SDSearchStore sharedStore] filterArray:self.searchResults];
     return YES;
 }
 
@@ -422,73 +380,5 @@
     displayResults = NO;
     [self.tableView reloadData];
 }
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(tableView == self.searchDisplayController.searchResultsTableView) {
-        NSArray* sections = [[SDSearchStore sharedStore] order];
-        searchItem = [[sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-        [self.searchDisplayController setActive:NO animated:YES];
-        self.searchDisplayController.searchBar.text = searchItem.name;
-        displayResults = YES;
-        [self searchSchedule];
-        [self.tableView reloadData];
-    }
-}
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
 
 @end
