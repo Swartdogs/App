@@ -15,7 +15,6 @@
 
 @interface SDTeleopView ()
 
-- (void) selectIndex:(int)index fromArray:(NSArray*)array;
 @end
 
 @implementation SDTeleopView
@@ -24,6 +23,14 @@
 
 - (void) stepView:(SDResizeStepperView *)stepView stepperTag:(int)tag newValue:(int)value {
     switch (tag) {
+        case 0: match.teleToteMax = value;
+                break;
+        case 1: match.teleTotesScored = value;
+                break;
+        case 2: match.teleContainerMax = value;
+                break;
+        case 3: match.teleContainersScored = value;
+                break;
         default:;
     }
 }
@@ -72,15 +79,6 @@
     [[SDViewServer getInstance] finishedEditMatchData:match showSummary:YES];
 }
 
-- (void) selectIndex:(int)index fromArray:(NSArray *)array {
-    bool isSelected;
-    
-    for(int i = 0; i < [array count]; i++) {
-        isSelected = ([(SDGradientButton*)[array objectAtIndex:i] tag] == index);
-        [(SDGradientButton*)[array objectAtIndex:i] setSelected:isSelected];
-    }
-}
-
 - (void) setMatch:(SDMatch *)editMatch originalMatch:(SDMatch *)unedittedMatch {
     match = editMatch;
     origMatch = unedittedMatch;
@@ -95,7 +93,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    teleToteMax.ScoreLabel.layer.cornerRadius           = 5.0f;
+    teleTotesScored.ScoreLabel.layer.cornerRadius       = 5.0f;
+    teleContainerMax.ScoreLabel.layer.cornerRadius      = 5.0f;
+    teleContainersScored.ScoreLabel.layer.cornerRadius  = 5.0f;
+
+    teleToteMax.delegate = self;
+    [teleToteMax.minusButton setColor];
+    [teleToteMax.plusButton setColor];
+    
+    teleTotesScored.delegate = self;
+    [teleTotesScored.minusButton setColor];
+    [teleTotesScored.plusButton setColor];
+
+    teleContainerMax.delegate = self;
+    [teleContainerMax.minusButton setColor];
+    [teleContainerMax.plusButton setColor];
+
+    teleContainersScored.delegate = self;
+    [teleContainersScored.minusButton setColor];
+    [teleContainersScored.plusButton setColor];
 }
 
 - (void) viewDidUnload {
@@ -109,7 +127,7 @@
     
     if((match.isCompleted & 4) == 0) {
         match.isCompleted |= 4;
-        UISegmentedControl *segControl = (UISegmentedControl*) [[[self toolbarItems] objectAtIndex:0] customView];
+        UISegmentedControl *segControl = (UISegmentedControl*) [[[self toolbarItems] objectAtIndex:1] customView];
         [segControl setTitle:@"TELEOP" forSegmentAtIndex:2];
     }
     
@@ -117,8 +135,14 @@
     self.navigationItem.titleView = myTitle.view;
     [[myTitle matchLabel] setText:[NSString stringWithFormat:@"Match %d: %d", match.matchNumber, match.teamNumber]];
     
-    [self selectIndex:match.teleTotesFrom fromArray:TotesFromButtons];
-
+    [(SDGradientButton*)[TotesFromButtons objectAtIndex:0] setSelected:(match.teleTotesFrom & 1) == 1];
+    [(SDGradientButton*)[TotesFromButtons objectAtIndex:1] setSelected:(match.teleTotesFrom & 2) == 2];
+    [(SDGradientButton*)[TotesFromButtons objectAtIndex:2] setSelected:(match.teleTotesFrom & 4) == 4];
+    
+    [teleToteMax            initStepperValue:match.teleToteMax Minimum:0 Maximum:6];
+    [teleTotesScored        initStepperValue:match.teleTotesScored Minimum:0 Maximum:70];
+    [teleContainerMax       initStepperValue:match.teleContainerMax Minimum:0 Maximum:6];
+    [teleContainersScored   initStepperValue:match.teleContainersScored Minimum:0 Maximum:7];
     
     self.navigationController.toolbar.translucent = NO;
     [[self navigationController] setToolbarHidden:NO animated:NO];
@@ -129,13 +153,12 @@
     [[self view] endEditing:YES];
 }
 
-// 1s digit
-- (IBAction) buttonTap:(id)sender {                             //Binds the buttons in one collection to this event
+- (IBAction) buttonTap:(id)sender {                         // Button Tap event for all button collections
     SDGradientButton*   button = sender;
-    int                 index = [sender tag] % 10;
+    int                 index = [sender tag] % 10;          // 1's Digit
     int                 bitValue = 1 << index;
-    // 10s digit
-    switch ([sender tag] / 10) {
+
+    switch ([sender tag] / 10) {                            // 10's Digit
         case 0: if (match.teleTotesFrom & bitValue) {
                     match.teleTotesFrom ^= bitValue;
                     button.selected = NO;
@@ -152,18 +175,6 @@
     [[self view] endEditing:YES];
 }
 
-- (IBAction) leftSwipe:(id)sender {
-    UISegmentedControl* viewSelectionControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:0] customView];
-    viewSelectionControl.selectedSegmentIndex--;
-    [self selectView:viewSelectionControl];
-}
-
-- (IBAction) rightSwipe:(id)sender {
-    UISegmentedControl* viewSelectionControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:0] customView];
-    viewSelectionControl.selectedSegmentIndex++;
-    [self selectView:viewSelectionControl];
-}
-
 - (IBAction) selectView:(id)sender {
     UISegmentedControl* viewSelectionControl = (UISegmentedControl*)sender;
     [[SDViewServer getInstance] showViewNewIndex:viewSelectionControl.selectedSegmentIndex + 1
@@ -175,7 +186,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

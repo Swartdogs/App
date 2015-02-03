@@ -16,18 +16,17 @@
 @interface SDTeleopView : UIViewController <UIAlertViewDelegate, SDResizeStepperViewDelegate> {
     SDMatch* match;
     SDMatch* origMatch;
-    __weak IBOutlet SDResizeStepperView* TotesMax;
-    __weak IBOutlet SDResizeStepperView* TotesScored;
-    __weak IBOutlet SDResizeStepperView* ContainersScored;
-    __weak IBOutlet SDResizeStepperView* ContainersMax;
+    
+    __weak IBOutlet SDResizeStepperView* teleContainerMax;
+    __weak IBOutlet SDResizeStepperView* teleContainersScored;
+    __weak IBOutlet SDResizeStepperView* teleToteMax;
+    __weak IBOutlet SDResizeStepperView* teleTotesScored;
 }
     
 @property (nonatomic, retain) IBOutletCollection(SDGradientButton) NSArray* TotesFromButtons;
 
-- (IBAction)buttonTap:(id)sender;
+- (IBAction) buttonTap:(id)sender;
 - (IBAction) backgroundTap:(id)sender;
-- (IBAction) leftSwipe:(id)sender;
-- (IBAction) rightSwipe:(id)sender;
 
 - (void) setMatch:(SDMatch*)editMatch originalMatch:(SDMatch*)unedittedMatch;
 

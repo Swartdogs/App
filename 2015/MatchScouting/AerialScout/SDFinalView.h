@@ -32,9 +32,6 @@
 - (IBAction) beginScoreEdit:(id)sender;
 - (IBAction) buttonTap:(id)sender;
 
-- (IBAction) leftSwipe:(id)sender;
-
-- (void) savePage;
 - (void) setMatch:(SDMatch*)editMatch originalMatch:(SDMatch *)unedittedMatch;
 
 @end

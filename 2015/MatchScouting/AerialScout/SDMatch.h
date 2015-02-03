@@ -16,7 +16,6 @@
 @property (nonatomic) int teamNumber;
 @property (nonatomic) int matchNumber;
 @property (nonatomic) int isCompleted;
-@property (nonatomic) int hasViewed;
 @property (nonatomic) int noShow;
 
 // Auto
@@ -25,15 +24,15 @@
 @property (nonatomic) int autoContainers;
 @property (nonatomic) int autoTotes;
 @property (nonatomic) int autoHandling;
-@property (nonatomic) int stepContainers;
+@property (nonatomic) int autoStep;
 
 // Teleop - Scoring
 
-@property (nonatomic) int StackMax;
-@property (nonatomic) int TotesScored;
-@property (nonatomic) int ContainersScored;
 @property (nonatomic) int teleTotesFrom;
-@property (nonatomic) int teleNoodles;
+@property (nonatomic) int teleToteMax;
+@property (nonatomic) int teleTotesScored;
+@property (nonatomic) int teleContainerMax;
+@property (nonatomic) int teleContainersScored;
 
 // Final
 

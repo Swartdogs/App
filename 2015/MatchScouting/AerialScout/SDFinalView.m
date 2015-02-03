@@ -1,6 +1,6 @@
 //
 //  SDFinalView.m
-//  RecycleScout
+//  RecycleScout/Users/team525students/Documents/SwartdogsScoutingApp/2015/MatchScouting/AerialScout/SDFinalView.m
 //
 //  Created by Srinivas Dhanwada on 1/7/14.
 //  Made worse by Seth Harwood 1/27/15.
@@ -16,7 +16,6 @@
 @interface SDFinalView ()
 
 - (void) dismissKeypad;
-- (void) selectIndex:(int)index fromArray:(NSArray*)array;
 
 @end
 
@@ -34,6 +33,7 @@
                 [[SDMatchStore sharedStore] replaceMatch:match withMatch:origMatch];
                 [[SDViewServer getInstance] finishedEditMatchData:origMatch showSummary:YES];
             }
+            
         } else {
             [self saveMatch:self];
         }
@@ -89,12 +89,6 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if((match.hasViewed & 4) == 0) {
-        match.finalPenalty = 0;
-        match.finalRobot = 0;
-        match.hasViewed |= 4;
-    }
-    
     SDTitleView* myTitle = [[SDTitleView alloc] initWithNibName:@"SDTitleView" bundle:nil];
     self.navigationItem.titleView = myTitle.view;
     
@@ -124,21 +118,9 @@
     [super viewWillDisappear:animated];
     
     [[self view] endEditing:YES];
-    [self savePage];
 }
 
-- (void) savePage {
-    if([[finalScoreField text] length] > 0) {
-        match.finalScore = [[finalScoreField text] intValue];
-    } else {
-        match.finalScore = -1;
-    }
-    
-   }
-
 - (void) saveMatch:(id)sender {
-    [self savePage];
-    
     if(match.noShow == 1) {
         if([[SDViewServer getInstance] matchEdit]) {
             match.noShow = 0;
@@ -149,15 +131,6 @@
     
     [[SDMatchStore sharedStore] saveChanges];
     [[SDViewServer getInstance] finishedEditMatchData:match showSummary:YES];
-}
-
-- (void) selectIndex:(int)index fromArray:(NSArray *)array {
-    bool isSelected;
-    
-    for(int i = 0; i < [array count]; i++) {
-        isSelected = ([(SDGradientButton*)[array objectAtIndex:i] tag] == index);
-        [(SDGradientButton*)[array objectAtIndex:i] setSelected:isSelected];
-    }
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
@@ -182,14 +155,16 @@
     
     [[SDViewServer getInstance] setMatchEdit:YES];
     
-    if(completed) {
+    if (completed) {
+        match.finalScore = [[finalScoreField text] intValue];
         match.isCompleted |= 8;
-        UISegmentedControl* segControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:0] customView];
+        UISegmentedControl* segControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:1] customView];
         [segControl setTitle:@"MATCH" forSegmentAtIndex:3];
         
     } else if(match.isCompleted & 8) {
+        match.finalScore = -1;
         match.isCompleted ^= 8;
-        UISegmentedControl* segControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:0] customView];
+        UISegmentedControl* segControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:1] customView];
         [segControl setTitle:@"Match" forSegmentAtIndex:3];
     }
 }
@@ -201,11 +176,11 @@
         return;
     }
     
-    int                 index = [sender tag] % 10;
-    int                 bitValue = 1 << index;
+    int  index = [sender tag] % 10;             // 1's digit
+    int  bitValue = 1 << index;
     bool selected;
-    // 10s digit
-    switch ([sender tag] / 10) {
+
+    switch ([sender tag] / 10) {                // 10's digit
         case 0: if((match.finalPenalty & bitValue) == bitValue) {
                     match.finalPenalty ^= bitValue;
                     selected = NO;
@@ -246,12 +221,6 @@
     }
 }
 
-- (IBAction) leftSwipe:(id)sender {
-    UISegmentedControl* viewSelectionControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:0] customView];
-    viewSelectionControl.selectedSegmentIndex--;
-    [self selectView:viewSelectionControl];
-}
-
 - (IBAction) selectView:(id)sender {
     UISegmentedControl* viewSelectionControl = (UISegmentedControl*)sender;
     [[SDViewServer getInstance] showViewNewIndex:viewSelectionControl.selectedSegmentIndex + 1
@@ -263,7 +232,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

@@ -3,7 +3,6 @@
 //  RecycleScout
 //
 //  Created by Srinivas Dhanwada on 1/7/14.
-//  Made worse by Seth Harwood 1/27/15.
 //  Copyright (c) 2014 Srinivas Dhanwada. All rights reserved.
 //
 
@@ -20,21 +19,17 @@
 
     __weak IBOutlet SDResizeStepperView* autoContainers;
     __weak IBOutlet SDResizeStepperView* autoTotes;
-    __weak IBOutlet SDResizeStepperView* stepContainers;
+    __weak IBOutlet SDResizeStepperView* autoStep;
     
     __weak IBOutlet UILabel* moveFlag;
   
 }
 @property (nonatomic, retain) IBOutletCollection(SDGradientButton) NSArray* autoRobotButtons;
-
 @property (nonatomic, retain) IBOutletCollection(SDGradientButton) NSArray* autoToteButtons;
 
 
 - (IBAction) backgroundTap:(id)sender;
 - (IBAction) buttonTap:(id)sender;
-
-- (IBAction) leftSwipe:(id)sender;
-- (IBAction) rightSwipe:(id)sender;
 
 - (void) setMatch:(SDMatch*)editMatch originalMatch:(SDMatch*)unedittedMatch;
 

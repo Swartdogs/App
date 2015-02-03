@@ -30,6 +30,7 @@
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     SDMatch* match;
     SDMatchStore* store = [SDMatchStore sharedStore];
+    
     if(buttonIndex == 0) {
         while([[store allMatches] count] > 0) {
             [store removeMatch:[[store allMatches] objectAtIndex:0]];
@@ -46,7 +47,7 @@
         while(i < [[store allMatches] count]) {
             match = [[store allMatches] objectAtIndex:i];
             
-            if(match.isCompleted == 31) {
+            if(match.isCompleted == 15) {
                 [store removeMatch:match];
             } else {
                 i++;
@@ -125,7 +126,6 @@
                                                                     target:self
                                                                     action:@selector(showSchedule:)];
     
-    
     if(!isIOS7) {
         [scheduleItem setWidth:70];
         [aboutItem setWidth:70];
@@ -154,6 +154,7 @@
     } else {
         [[myTitle matchLabel] setText:@"Scouting List"];
     }
+    
     [[self tableView] reloadData];
     self.navigationController.toolbar.translucent = NO;
     [[self navigationController] setToolbarHidden:NO animated:NO];
@@ -205,10 +206,7 @@
     
     [[cell matchNumberLabel] setText:[NSString stringWithFormat:@"%d", cellMatch.matchNumber]];
     [[cell teamNumberLabel] setText:[NSString stringWithFormat:@"%d", cellMatch.teamNumber]];
-    [[cell checkmarkImage] setHidden:(cellMatch.isCompleted != 31)];
-    
-    
-    // Configure the cell...
+    [[cell checkmarkImage] setHidden:(cellMatch.isCompleted != 15)];
     
     return cell;
 }
@@ -273,7 +271,6 @@
 }
 
 - (IBAction) clearTable:(id)sender {
-    
     UIActionSheet* clearAction = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
@@ -290,7 +287,6 @@
 }
 
 - (IBAction) editMatchList:(id)sender {
-    
     self.navigationItem.titleView = myTitle.view;
     [[myTitle matchLabel] setText:@"Edit List"];
     
@@ -317,7 +313,6 @@
 - (IBAction) showAbout:(id)sender {
     SDAboutView *aboutView = [[SDAboutView alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:aboutView];
-    
     
     if(isIOS7) {
         [[navController navigationBar] setBarTintColor:[UIColor orangeColor]];

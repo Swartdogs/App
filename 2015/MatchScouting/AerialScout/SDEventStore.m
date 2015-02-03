@@ -22,7 +22,7 @@
 }
 - (void) setHeaderIsShown:(BOOL)shown {
     scoutHeader = shown;
-    [[NSUserDefaults standardUserDefaults] setInteger:scoutHeader forKey:@"AerialScoutHeaderPrefKey"];
+    [[NSUserDefaults standardUserDefaults] setInteger:scoutHeader forKey:@"ScoutHeaderPrefKey"];
 }
 
 - (BOOL) scoutHeader {
@@ -31,7 +31,7 @@
 
 - (void) setEventTitle:(NSString*)title {
     eventTitle = title;
-    [[NSUserDefaults standardUserDefaults] setObject:eventTitle forKey:@"AerialScoutEventPrefKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:eventTitle forKey:@"ScoutEventPrefKey"];
 }
 
 - (NSString*) eventTitle {
@@ -40,7 +40,7 @@
 
 - (void) setBuildListTitle:(NSString*)title {
     buildListTitle = title;
-    [[NSUserDefaults standardUserDefaults] setObject:buildListTitle forKey:@"AerialScoutBuildTitlePrefKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:buildListTitle forKey:@"ScoutBuildTitlePrefKey"];
 }
 
 - (NSString*) buildListTitle {
@@ -83,13 +83,13 @@
         allGroups  = [[NSMutableArray alloc] init];
         selectedID = [[NSString alloc] init];
         
-        eventTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"AerialScoutEventPrefKey"];
+        eventTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutEventPrefKey"];
         if(!eventTitle) eventTitle = @"";
         
-        buildListTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"AerialScoutBuildTitlePrefKey"];
+        buildListTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutBuildTitlePrefKey"];
         if(!buildListTitle) buildListTitle = @"";
         
-        scoutHeader = [[NSUserDefaults standardUserDefaults] integerForKey:@"AerialScoutHeaderPrefKey"];
+        scoutHeader = [[NSUserDefaults standardUserDefaults] integerForKey:@"ScoutHeaderPrefKey"];
         if(!scoutHeader) scoutHeader = NO;
         
         updateHeader = NO;

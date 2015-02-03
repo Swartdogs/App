@@ -11,7 +11,7 @@
 
 @implementation SDMatch
 
-@synthesize teamNumber, matchNumber, hasViewed, isCompleted, autoRobot, autoContainers, autoTotes, autoHandling, stepContainers, StackMax, TotesScored, ContainersScored, teleTotesFrom, teleNoodles, finalPenalty, finalRobot, finalScore;
+@synthesize teamNumber, matchNumber, isCompleted, noShow, autoRobot, autoContainers, autoTotes, autoHandling, autoStep, teleTotesFrom, teleToteMax, teleTotesScored, teleContainerMax, teleContainersScored, finalScore, finalPenalty, finalRobot;
 
 - (id) init {
     if (self = [super init]) {
@@ -26,26 +26,26 @@
        
         // Match
         
-        self.teamNumber            = copy.teamNumber;
-        self.matchNumber           = copy.matchNumber;
-        self.isCompleted           = copy.isCompleted;
-        self.hasViewed             = copy.hasViewed;
+        self.teamNumber             = copy.teamNumber;
+        self.matchNumber            = copy.matchNumber;
+        self.isCompleted            = copy.isCompleted;
+        self.noShow                 = copy.noShow;
         
         // Auto
         
-        self.autoRobot             = copy.autoRobot;
-        self.autoContainers        = copy.autoContainers;
-        self.autoTotes             = copy.autoTotes;
-        self.autoHandling          = copy.autoHandling;
-        self.stepContainers        = copy.stepContainers;
+        self.autoRobot              = copy.autoRobot;
+        self.autoContainers         = copy.autoContainers;
+        self.autoTotes              = copy.autoTotes;
+        self.autoHandling           = copy.autoHandling;
+        self.autoStep               = copy.autoStep;
         
         // Teleop - Scoring
         
-        self.StackMax              = copy.StackMax;
-        self.TotesScored           = copy.TotesScored;
-        self.ContainersScored      = copy.ContainersScored;
-        self.teleTotesFrom         = copy.teleTotesFrom;
-        self.teleNoodles           = copy.teleNoodles;
+        self.teleTotesFrom          = copy.teleTotesFrom;
+        self.teleToteMax            = copy.teleToteMax;
+        self.teleTotesScored        = copy.teleTotesScored;
+        self.teleContainerMax       = copy.teleContainerMax;
+        self.teleContainersScored   = copy.teleContainersScored;
 
         // Final
         
@@ -63,32 +63,32 @@
     
     // Match
         
-        self.teamNumber         = [aDecoder decodeIntForKey:@"teamNumber"];
-        self.matchNumber        = [aDecoder decodeIntForKey:@"matchNumber"];
-        self.isCompleted        = [aDecoder decodeIntForKey:@"isCompleted"];
-        self.hasViewed          = [aDecoder decodeIntForKey:@"hasViewed"];
+        self.teamNumber             = [aDecoder decodeIntForKey:@"teamNumber"];
+        self.matchNumber            = [aDecoder decodeIntForKey:@"matchNumber"];
+        self.isCompleted            = [aDecoder decodeIntForKey:@"isCompleted"];
+        self.noShow                 = [aDecoder decodeIntForKey:@"noShow"];
     
     // Auto
     
-        self.autoRobot          = [aDecoder decodeIntForKey:@"autoRobot"];
-        self.autoContainers     = [aDecoder decodeIntForKey:@"autoContainers"];
-        self.autoTotes          = [aDecoder decodeIntForKey:@"autoTotes"];
-        self.autoHandling       = [aDecoder decodeIntForKey:@"autoHandling"];
-        self.stepContainers     = [aDecoder decodeIntForKey:@"stepContainers"];
+        self.autoRobot              = [aDecoder decodeIntForKey:@"autoRobot"];
+        self.autoContainers         = [aDecoder decodeIntForKey:@"autoContainers"];
+        self.autoTotes              = [aDecoder decodeIntForKey:@"autoTotes"];
+        self.autoHandling           = [aDecoder decodeIntForKey:@"autoHandling"];
+        self.autoStep               = [aDecoder decodeIntForKey:@"autoStep"];
     
-    // Teleop - Scoring
+    // Teleop
         
-        self.StackMax           = [aDecoder decodeIntForKey:@"StackMax"];
-        self.TotesScored        = [aDecoder decodeIntForKey:@"TotesScored"];
-        self.ContainersScored   = [aDecoder decodeIntForKey:@"ContainersScored"];
-        self.teleTotesFrom      = [aDecoder decodeIntForKey:@"teleTotesFrom"];
-        self.teleNoodles        = [aDecoder decodeIntForKey:@"teleNoodles"];
+        self.teleTotesFrom          = [aDecoder decodeIntForKey:@"teleTotesFrom"];
+        self.teleToteMax            = [aDecoder decodeIntForKey:@"teleToteMax"];
+        self.teleTotesScored        = [aDecoder decodeIntForKey:@"teleTotesScored"];
+        self.teleContainerMax       = [aDecoder decodeIntForKey:@"teleContainerMax"];
+        self.teleContainersScored   = [aDecoder decodeIntForKey:@"teleContainersScored"];
 
     // Final
     
-        self.finalScore         = [aDecoder decodeIntForKey:@"finalScore"];
-        self.finalPenalty       = [aDecoder decodeIntForKey:@"finalPenalty"];
-        self.finalRobot         = [aDecoder decodeIntForKey:@"finalRobot"];
+        self.finalScore             = [aDecoder decodeIntForKey:@"finalScore"];
+        self.finalPenalty           = [aDecoder decodeIntForKey:@"finalPenalty"];
+        self.finalRobot             = [aDecoder decodeIntForKey:@"finalRobot"];
     
     }
     
@@ -100,26 +100,26 @@
     
     // Match
     
-    [aCoder encodeInt:teamNumber       forKey:@"teamNumber"];
-    [aCoder encodeInt:matchNumber      forKey:@"matchNumber"];
-    [aCoder encodeInt:isCompleted      forKey:@"isCompleted"];
-    [aCoder encodeInt:hasViewed        forKey:@"hasViewed"];
+    [aCoder encodeInt:teamNumber            forKey:@"teamNumber"];
+    [aCoder encodeInt:matchNumber           forKey:@"matchNumber"];
+    [aCoder encodeInt:isCompleted           forKey:@"isCompleted"];
+    [aCoder encodeInt:noShow                forKey:@"noShow"];
     
     // Auto
     
-    [aCoder encodeInt:autoRobot        forKey:@"autoRobot"];
-    [aCoder encodeInt:autoContainers   forKey:@"autoContainers"];
-    [aCoder encodeInt:autoTotes        forKey:@"autoTotes"];
-    [aCoder encodeInt:autoHandling     forKey:@"autoHandling"];
-    [aCoder encodeInt:stepContainers   forKey:@"stepContainers"];
+    [aCoder encodeInt:autoRobot             forKey:@"autoRobot"];
+    [aCoder encodeInt:autoContainers        forKey:@"autoContainers"];
+    [aCoder encodeInt:autoTotes             forKey:@"autoTotes"];
+    [aCoder encodeInt:autoHandling          forKey:@"autoHandling"];
+    [aCoder encodeInt:autoStep              forKey:@"autoStep"];
     
     // Teleop - Scoring
     
-    [aCoder encodeInt:StackMax         forKey:@"StackMax"];
-    [aCoder encodeInt:TotesScored      forKey:@"TotesScored"];
-    [aCoder encodeInt:ContainersScored forKey:@"ContainersScored"];
-    [aCoder encodeInt:teleTotesFrom    forKey:@"teleTotesFrom"];
-    [aCoder encodeInt:teleNoodles      forKey:@"teleNoodles"];
+    [aCoder encodeInt:teleTotesFrom         forKey:@"teleTotesFrom"];
+    [aCoder encodeInt:teleToteMax           forKey:@"teleToteMax"];
+    [aCoder encodeInt:teleTotesScored       forKey:@"teleTotesScored"];
+    [aCoder encodeInt:teleContainerMax      forKey:@"teleContainerMax"];
+    [aCoder encodeInt:teleContainersScored  forKey:@"teleContainersScored"];
     
     // Final
     
@@ -130,84 +130,85 @@
 
 - (void) setToDefaults {
     
-    // single feild selection = -1
-    // keyboard feild = -1
-    // all else = 0
+    // Required fields = -1
+    // Otherwise = 0
     
     // Match
     
-    self.teamNumber       = 0;
-    self.matchNumber      = 0;
-    self.isCompleted      = 0;
-    self.hasViewed        = 0;
+    self.teamNumber             = 0;
+    self.matchNumber            = 0;
+    self.isCompleted            = 0;
+    self.noShow                 = 0;
     
     // Auto
     
-    self.autoRobot          = -1;
-    self.autoContainers     = 0;
-    self.autoTotes          = 0;
-    self.autoHandling       = 0;
-    self.stepContainers     = 0;
+    self.autoRobot              = -1;
+    self.autoContainers         = 0;
+    self.autoTotes              = 0;
+    self.autoHandling           = 0;
+    self.autoStep               = 0;
     
     // Teleop - Scoring
     
-    self.StackMax           = 0;
-    self.TotesScored        = 0;
-    self.ContainersScored   = 0;
-    self.teleTotesFrom      = 0;
-    self.teleNoodles        = 0;
+    self.teleTotesFrom          = 0;
+    self.teleToteMax            = 0;
+    self.teleTotesScored        = 0;
+    self.teleContainerMax       = 0;
+    self.teleContainersScored   = 0;
     
     // Final
     
-    self.finalScore       = -1;
-    self.finalPenalty     = 0;
-    self.finalRobot       = 0;
+    self.finalScore             = -1;
+    self.finalPenalty           = 0;
+    self.finalRobot             = 0;
     
 }
-    // Headers that will appear when exported to excel
+
 + (NSString*) writeHeader {
-    return [NSString stringWithFormat:@"Team Number, Match Number, Is Completed, Auto Robot Moved, Auto Containers Moved, Yellow Totes Moved, Max Stack Height, Totes Scored, Containers Scored, Totes Collected from, Litter From Where, Penalties, Stalled/Tipped, Final Score \r\n"];
+    return [NSString stringWithFormat:@"Team Number, Match Number, Is Completed, No Show, Auto Robot, Auto Containers, Auto Totes, Auto Handling, Auto Step, Tele Totes From, Tele Totes Max, Tele Totes Scored, Tele Containers Max, Tele Containers Scored, Penalties, Robot Issues, Final Score \r\n"];
 }
 
 - (NSString*) writeMatch {
     if(self.noShow == 1) {
-        return [NSString stringWithFormat:@"  %i, %i, %i, , , , , , , , , , , , , , , , , , , , , , , , , , %i,   \r\n",
-                self.teamNumber,
-                self.matchNumber,
-                self.isCompleted,
-                self.noShow];
+        return [NSString stringWithFormat:@"  %i, %i, %i, %i, , , , , , , , , , , , ,  \r\n",
+        
+        self.teamNumber,
+        self.matchNumber,
+        self.isCompleted,
+        self.noShow];
+        
     } else {
         // need "%i" for everything that will appear in excel
-        return [NSString stringWithFormat:@"  %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i  \r\n",
-        // all of the things that need the "%i" above
+        return [NSString stringWithFormat:@"  %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i  \r\n",
         
         // Match
                 
-         self.teamNumber,
-         self.matchNumber,
-         self.isCompleted,
-         
+        self.teamNumber,
+        self.matchNumber,
+        self.isCompleted,
+        self.noShow,
+            
         // Auto
                 
-         self.autoRobot,
-         self.autoContainers,
-         self.autoTotes,
-         self.autoHandling,
-         self.stepContainers,
+        self.autoRobot,
+        self.autoContainers,
+        self.autoTotes,
+        self.autoHandling,
+        self.autoStep,
          
         // Teleop - Scoring
                 
-         self.StackMax,
-         self.TotesScored,
-         self.ContainersScored,
-         self.teleTotesFrom,
-         self.teleNoodles,
+        self.teleTotesFrom,
+        self.teleToteMax,
+        self.teleTotesScored,
+        self.teleContainerMax,
+        self.teleContainersScored,
          
         // Final
                 
-         self.finalPenalty,
-         self.finalRobot,
-         self.finalScore];
+        self.finalPenalty,
+        self.finalRobot,
+        self.finalScore];
     }
 }
 

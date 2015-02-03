@@ -47,8 +47,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        
         UIBarButtonItem* doneItem = [[UIBarButtonItem alloc]
                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                      target:self
@@ -79,27 +77,27 @@
 }
 
 - (void) viewDidUnload {
-    
     // Match
-    
-    finalPenaltyLabel      = nil;
-    finalPenaltyCardLabel  = nil;
-    finalRobotLabel        = nil;
+
+    finalPointsLabel            = nil;
+    finalPenaltyLabel           = nil;
+    finalRobotIssuesLabel       = nil;
     
     // Auto
     
-    autoMoveLabel          = nil;
-    autoContainersLabel    = nil;
-    autoTotesLabel         = nil;
+    autoRobotLabel              = nil;
+    autoContainersLabel         = nil;
+    autoTotesLabel              = nil;
+    autoToteHandlingLabel       = nil;
+    autoStepContainersLabel     = nil;
     
     // Teleop
     
-    stackMaxLabel          = nil;
-    totesScoredLabel       = nil;
-    containersScoredLabel  = nil;
-    teleTotesFromLabel     = nil;
-    teleNoodlesLabel       = nil;
-    
+    teleTotesFromLabel          = nil;
+    teleToteLevelLabel          = nil;
+    teleTotesScoredLabel        = nil;
+    teleContainerLevelLabel     = nil;
+    teleContainersScoredLabel   = nil;
     
     [super viewDidUnload];
 }
@@ -129,97 +127,77 @@
         
         // Match
         
-        finalPenaltyLabel.text      = @"";
-        finalPenaltyCardLabel.text  = @"";
-        finalRobotLabel.text        = @"";
+        finalPointsLabel.text           = @"No Show";
+        finalPenaltyLabel.text          = @"";
+        finalRobotIssuesLabel.text      = @"";
 
         // Auto
         
-        autoMoveLabel.text          = @"";
-        autoContainersLabel.text    = @"";
-        autoTotesLabel.text         = @"";
+        autoRobotLabel.text             = @"";
+        autoContainersLabel.text        = @"";
+        autoTotesLabel.text             = @"";
+        autoToteHandlingLabel.text      = @"";
+        autoStepContainersLabel.text    = @"";
         
         // Teleop
         
-        stackMaxLabel.text          = @"";
-        totesScoredLabel.text       = @"";
-        containersScoredLabel.text  = @"";
-        teleTotesFromLabel.text     = @"";
-        teleNoodlesLabel.text       = @"";
+        teleTotesFromLabel.text         = @"";
+        teleToteLevelLabel.text         = @"";
+        teleTotesScoredLabel.text       = @"";
+        teleContainerLevelLabel.text    = @"";
+        teleContainersScoredLabel.text  = @"";
         
         return;
     }
     
     [checkmarkImage setHidden:(match.isCompleted != 15)];
     
-    finalRobotLabel.text = [NSString stringWithFormat:@"%@", match.finalRobot == 0 ? @"Stalled" :
-                                                             match.finalRobot == 1 ? @"Tipped Over" :
-                                                                                     @""];
+    finalPointsLabel.text = match.finalScore < 0 ? @"" : [NSString stringWithFormat:@"%i", match.finalScore];
     
-//    autoMoveLabel.text = [NSString stringWithFormat:@"%@", match.autoMoved == 0 ? @"Stayed" :
-//                                                           match.autoMoved == 1 ? @"Moved" :
-//                                                                                  @""];
+    NSMutableString* label = [[NSMutableString alloc] init];
     
-    teleTotesFromLabel.text = [NSString stringWithFormat:@"%@", match.teleTotesFrom == 0 ? @"Feeder" :
-                                                                match.teleTotesFrom == 1 ? @"Landfill" :
-                                                                match.teleTotesFrom == 2 ? @"Step" :
-                                                                                           @""];
+    [label setString:@""];
+    if ((match.finalPenalty & 1) == 1) [label appendString:@"-Foul"];
+    if ((match.finalPenalty & 2) == 2) [label appendString:@"-Yellow"];
+    if ((match.finalPenalty & 4) == 4) [label appendString:@"-Red"];
+    finalPenaltyLabel.text = match.finalPenalty == 0 ? @"" : [label substringFromIndex:1];
+
+    [label setString:@""];
+    if ((match.finalRobot & 1) == 1) [label appendString:@"-Stalled"];
+    if ((match.finalRobot & 2) == 2) [label appendString:@"-Tipped"];
+    finalRobotIssuesLabel.text = match.finalRobot == 0 ? @"" : [label substringFromIndex:1];
     
-    teleNoodlesLabel.text = [NSString stringWithFormat:@"%@", match.teleNoodles == 0 ? @"R.C.s" :
-                                                              match.teleNoodles == 1 ? @"Ground" :
-                                                                                       @""];
-    // Counters!!!
+    autoRobotLabel.text = [NSString stringWithFormat:@"%@", match.autoRobot == 0 ? @"No" :
+                                                            match.autoRobot == 1 ? @"Yes" :
+                                                                                   @""];
     
-    if((match.isCompleted & 4) == 0) {
-        stackMaxLabel.text = @"";
-        totesScoredLabel.text = @"";
-        containersScoredLabel.text = @"";
-   } else {
+    autoContainersLabel.text = [NSString stringWithFormat:@"%i", match.autoContainers];
     
-       stackMaxLabel.text = [NSString stringWithFormat:@"%d", match.StackMax];
-       totesScoredLabel.text = [NSString stringWithFormat:@"%d", match.TotesScored];
-       containersScoredLabel.text = [NSString stringWithFormat:@"%d", match.ContainersScored];
-       
-       //Examples of things with multiple things;
-       // scoreTrussPassLabel.text = [NSString stringWithFormat:@"%d / %d", match.scoreTrussPass, (match.scoreTrussPass + match.scoreMissedTruss)];
-       // scoreAssistContributionsLabel.text = [NSString stringWithFormat:@"%d / %d", (match.scoreTeamAssist1+match.scoreTeamAssist2+match.scoreTeamAssist3), match.scoreCycles];
-    }
+    autoTotesLabel.text = [NSString stringWithFormat:@"%i", match.autoTotes];
     
-    autoTotesLabel.text = [NSString stringWithFormat:@"%@", (match.autoTotes == 0) ? @"None" :
-                                                            (match.autoTotes == 1) ? @"One Tote" :
-                                                            (match.autoTotes == 2) ? @"Two Totes" :
-                                                            (match.autoTotes == 3) ? @"Three Totes" : @""];
+    [label setString:@""];
+    if ((match.autoHandling & 1) == 1) [label appendString:@"-Single"];
+    if ((match.autoHandling & 2) == 2) [label appendString:@"-Stack"];
+    if ((match.autoHandling & 4) == 4) [label appendString:@"-Added"];
+    autoToteHandlingLabel.text = match.autoHandling == 0 ? @"" : [label substringFromIndex:1];
     
-    autoContainersLabel.text = [NSString stringWithFormat:@"%@", (match.autoContainers == 0) ? @"None" :
-                                                                 (match.autoContainers == 1) ? @"One R.C." :
-                                                                 (match.autoContainers == 2) ? @"Two R.C.s" :
-                                                                 (match.autoContainers == 3) ? @"Three R.Cs" : @""];
+    autoStepContainersLabel.text = [NSString stringWithFormat:@"%i", match.autoStep];
     
-    if(match.finalPenalty == -1 && (match.isCompleted & 16) == 0) {
-        finalPenaltyLabel.text = @"";
-        finalPenaltyCardLabel.text = @"";
-    } else {
-        switch (match.finalPenalty & 1) {
-            case -1:finalPenaltyLabel.text = @"";          break;
-            case 0: finalPenaltyLabel.text = @"None";      break;
-            case 1: finalPenaltyLabel.text = @"Foul";      break;
-        }
-        
-        switch (match.finalPenalty & 12) {
-            case -1: finalPenaltyCardLabel.text = @"";           break;
-            case 0:  finalPenaltyCardLabel.text = @"None";       break;
-            case 4:  finalPenaltyCardLabel.text = @"Yellow";     break;
-            case 8:  finalPenaltyCardLabel.text = @"Red";        break;
-            case 12: finalPenaltyCardLabel.text = @"Yellow+Red"; break;
-        }
-    }
+    [label setString:@""];
+    if ((match.teleTotesFrom & 1) == 1) [label appendString:@"-Feeder"];
+    if ((match.teleTotesFrom & 2) == 2) [label appendString:@"-Landfill"];
+    if ((match.teleTotesFrom & 4) == 4) [label appendString:@"-Step"];
+    teleTotesFromLabel.text = match.teleTotesFrom == 0 ? @"" : [label substringFromIndex:1];
     
+    teleToteLevelLabel.text         = [NSString stringWithFormat:@"%i", match.teleToteMax];
+    teleTotesScoredLabel.text       = [NSString stringWithFormat:@"%i", match.teleTotesScored];
+    teleContainerLevelLabel.text    = [NSString stringWithFormat:@"%i", match.teleContainerMax];
+    teleContainersScoredLabel.text  = [NSString stringWithFormat:@"%i", match.teleContainersScored];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

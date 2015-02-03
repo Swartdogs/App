@@ -74,6 +74,7 @@
 
 - (void) importSearchItems {
     NSArray* schedules = [[SDScheduleStore sharedStore] allSchedules];
+    
     [all removeAllObjects];
     [robots removeAllObjects];
     [times removeAllObjects];
@@ -111,14 +112,14 @@
             [robots addObject:search];
             [all addObject:search];
         }
-        if([self isNewTime:schedule.matchTime]) {
-            search = [[SDSearch alloc] initWithName:schedule.matchTime andType:@"Time"];
-            [times addObject:search];
-            [all addObject:search];
-        }
-        search = [[SDSearch alloc] initWithName:[NSString stringWithFormat:@"%d", schedule.matchNumber] andType:@"Match"];
-        [matches addObject:search];
-        [all addObject:search];
+//        if([self isNewTime:schedule.matchTime]) {
+//            search = [[SDSearch alloc] initWithName:schedule.matchTime andType:@"Time"];
+//            [times addObject:search];
+//            [all addObject:search];
+//        }
+//        search = [[SDSearch alloc] initWithName:[NSString stringWithFormat:@"%d", schedule.matchNumber] andType:@"Match"];
+//        [matches addObject:search];
+//        [all addObject:search];
         
     }
 }

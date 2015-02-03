@@ -118,7 +118,12 @@
     [toolButtons addTarget:viewController action:@selector(selectView:) forControlEvents:UIControlEventValueChanged];
     
     UIBarButtonItem* viewItem = [[UIBarButtonItem alloc] initWithCustomView:toolButtons];
-    [viewController setToolbarItems:[NSArray arrayWithObject:viewItem]];
+    UIBarButtonItem* flexItem =     [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                     target:nil
+                                     action:nil];
+
+    [viewController setToolbarItems:[NSArray arrayWithObjects:flexItem, viewItem, flexItem, nil]];
 }
 
 - (void) finishedEditMatchData:(SDMatch*)match showSummary:(BOOL)show {

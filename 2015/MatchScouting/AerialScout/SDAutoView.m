@@ -31,7 +31,7 @@
                 break;
         case 1: match.autoTotes = value;
                 break;
-        case 2: match.stepContainers = value;
+        case 2: match.autoStep = value;
                 break;
         default:;
     }
@@ -75,7 +75,7 @@
     [moveFlag setHidden:(match.autoRobot >= 0)];
     [[SDViewServer getInstance] setMatchEdit:YES];
     
-    UISegmentedControl* segControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:0] customView];
+    UISegmentedControl* segControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:1] customView];
     
     if(completed) {
         match.isCompleted |= 2;
@@ -91,7 +91,7 @@
         if([[SDViewServer getInstance] matchEdit]) {
             match.noShow = 0;
         } else {
-            match.isCompleted = 31;
+            match.isCompleted = 15;
         }
     }
     
@@ -125,7 +125,7 @@
     
     autoContainers.ScoreLabel.layer.cornerRadius    = 5.0f;
     autoTotes.ScoreLabel.layer.cornerRadius         = 5.0f;
-    stepContainers.ScoreLabel.layer.cornerRadius    = 5.0f;
+    autoStep.ScoreLabel.layer.cornerRadius          = 5.0f;
     
     autoContainers.delegate = self;
     [autoContainers.minusButton setColor];
@@ -135,23 +135,22 @@
     [autoTotes.minusButton setColor];
     [autoTotes.plusButton setColor];
     
-    stepContainers.delegate = self;
-    [stepContainers.minusButton setColor];
-    [stepContainers.plusButton setColor];
+    autoStep.delegate = self;
+    [autoStep.minusButton setColor];
+    [autoStep.plusButton setColor];
 }
 
 - (void) viewDidUnload {
     [super viewDidUnload];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    if((match.hasViewed & 2) == 0) {
-        match.autoContainers = 0;
-        
-        match.hasViewed |= 2;
-    }
     
     SDTitleView* myTitle = [[SDTitleView alloc] initWithNibName:@"SDTitleView" bundle:nil];
     self.navigationItem.titleView = myTitle.view;
@@ -161,7 +160,7 @@
     
     [autoContainers     initStepperValue:match.autoContainers Minimum:0 Maximum:3];
     [autoTotes          initStepperValue:match.autoTotes Minimum:0 Maximum:3];
-    [stepContainers     initStepperValue:match.stepContainers Minimum:0 Maximum:4];
+    [autoStep           initStepperValue:match.autoStep Minimum:0 Maximum:4];
     
     [(SDGradientButton*)[autoToteButtons objectAtIndex:0] setSelected:(match.autoHandling & 1) == 1];
     [(SDGradientButton*)[autoToteButtons objectAtIndex:1] setSelected:(match.autoHandling & 2) == 2];
@@ -171,10 +170,7 @@
     
     self.navigationController.toolbar.translucent = NO;
     [[self navigationController] setToolbarHidden:NO animated:NO];
-}
 
-- (void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     [[self view] endEditing:YES];
 }
 
@@ -182,17 +178,17 @@
     [[self view] endEditing:YES];
 }
 
- // 1s digit
-- (IBAction) buttonTap:(id)sender {                             //Binds the buttons in one collection to this event
+- (IBAction) buttonTap:(id)sender {                             // Button Tap event for all button collections
     SDGradientButton*   button = sender;
-    int                 index = [sender tag] % 10;
+    int                 index = [sender tag] % 10;              // 1's digit
     int                 bitValue = 1 << index;
- // 10s digit
-    switch ([sender tag] / 10) {
+    
+    switch ([sender tag] / 10) {                                // 10's digit
         case 0: match.autoRobot = index;
                 [self selectIndex:index fromArray:autoRobotButtons];
                 [self isDataComplete];
                 break;
+            
         case 1: if (match.autoHandling & bitValue) {
                     match.autoHandling ^= bitValue;
                     button.selected = NO;
@@ -203,18 +199,6 @@
                 break;
         default:;
     }
-}
-
-- (IBAction) leftSwipe:(id)sender {
-    UISegmentedControl* viewSelectionControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:0] customView];
-    viewSelectionControl.selectedSegmentIndex--;
-    [self selectView:viewSelectionControl];
-}
-
-- (IBAction) rightSwipe:(id)sender {
-    UISegmentedControl* viewSelectionControl = (UISegmentedControl*)[[[self toolbarItems] objectAtIndex:0] customView];
-    viewSelectionControl.selectedSegmentIndex++;
-    [self selectView:viewSelectionControl];
 }
 
 - (IBAction) selectView:(id)sender {
@@ -228,6 +212,5 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 @end

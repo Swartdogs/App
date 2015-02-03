@@ -16,7 +16,7 @@
 
 + (SDScheduleStore*) sharedStore;
 
-- (NSArray*)  allSchedules;
+- (NSArray*)    allSchedules;
 - (SDSchedule*) createSchedule;
 - (void)        removeAll;
 - (void)        removeSchedule:(SDSchedule*)thisSchedule;

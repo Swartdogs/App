@@ -33,11 +33,7 @@
 - (IBAction)isDataComplete:(id)sender;
 - (IBAction)noShowButtonTap:(id)sender;
 
-- (IBAction) rightSwipe:(id)sender;
-
-- (void) savePage;
 - (void) setMatch:(SDMatch*)editMatch originalMatch:(SDMatch*)unedittedMatch;
-- (IBAction)beginMatchEdit:(id)sender;
-- (IBAction)beginTeamEdit:(id)sender;
+- (IBAction)beginEdit:(id)sender;
 
 @end

@@ -22,24 +22,24 @@
 
 + (SDEventStore*) sharedStore;
 
-- (void) updateHeader:(BOOL)update;
-- (BOOL) shouldUpdateHeader;
-- (void) setHeaderIsShown:(BOOL)shown;
-- (BOOL) scoutHeader;
-- (void) setEventTitle:(NSString*)title;
-- (NSString*) eventTitle;
-- (void) setBuildListTitle:(NSString*)title;
-- (NSString*) buildListTitle;
+- (void)        updateHeader:(BOOL)update;
+- (BOOL)        shouldUpdateHeader;
+- (void)        setHeaderIsShown:(BOOL)shown;
+- (BOOL)        scoutHeader;
+- (void)        setEventTitle:(NSString*)title;
+- (NSString*)   eventTitle;
+- (void)        setBuildListTitle:(NSString*)title;
+- (NSString*)   buildListTitle;
 
-- (NSArray*) allEvents;
-- (NSArray*) allGroups;
-- (NSString*) selectedID;
-- (void) setSeletedID:(NSString*)ID;
-- (SDEvent*) getEventInSection:(int)section atIndex:(int)index;
-- (int) getGroupCountInSection:(int)section;
-- (SDEvent*) createEvent;
-- (void) removeEvent:(SDEvent*)thisEvent;
-- (void) buildEventList;
-- (NSString*) getGroupNameInSection:(int)section;
+- (NSArray*)    allEvents;
+- (NSArray*)    allGroups;
+- (NSString*)   selectedID;
+- (void)        setSeletedID:(NSString*)ID;
+- (SDEvent*)    getEventInSection:(int)section atIndex:(int)index;
+- (int)         getGroupCountInSection:(int)section;
+- (SDEvent*)    createEvent;
+- (void)        removeEvent:(SDEvent*)thisEvent;
+- (void)        buildEventList;
+- (NSString*)   getGroupNameInSection:(int)section;
 
 @end

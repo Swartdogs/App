@@ -68,7 +68,7 @@
 }
 
 - (void) searchSchedule {
-    int searchNumber;
+//    int searchNumber;
     [searchMatchItems removeAllObjects];
     [searchNumbers removeAllObjects];
     
@@ -77,46 +77,33 @@
     for(SDSchedule* item in allScheduleItems) {
         NSNumberFormatter* numFormat = [[NSNumberFormatter alloc] init];
         [numFormat setNumberStyle:NSNumberFormatterNoStyle];
-        if([searchItem.type isEqualToString:@"Robot"]) {
-            int number = [[numFormat numberFromString:searchItem.name] intValue];
-            if(number == item.teamRed1) {
-                [searchMatchItems addObject:item];
-                searchNumber = 1;
-                [searchNumbers addObject:[NSNumber numberWithInt:searchNumber]];
-            } else if(number == item.teamRed2) {
-                [searchMatchItems addObject:item];
-                searchNumber = 2;
-                [searchNumbers addObject:[NSNumber numberWithInt:searchNumber]];
-            } else if(number == item.teamRed3) {
-                [searchMatchItems addObject:item];
-                searchNumber = 3;
-                [searchNumbers addObject:[NSNumber numberWithInt:searchNumber]];
-            } else if(number == item.teamBlue1) {
-                [searchMatchItems addObject:item];
-                searchNumber = 4;
-                [searchNumbers addObject:[NSNumber numberWithInt:searchNumber]];
-            } else if(number == item.teamBlue2) {
-                [searchMatchItems addObject:item];
-                searchNumber = 5;
-                [searchNumbers addObject:[NSNumber numberWithInt:searchNumber]];
-            } else if(number == item.teamBlue3) {
-                [searchMatchItems addObject:item];
-                searchNumber = 6;
-                [searchNumbers addObject:[NSNumber numberWithInt:searchNumber]];
-            }
-        } else if([searchItem.type isEqualToString:@"Match"]) {
-            int number = [[numFormat numberFromString:searchItem.name] intValue];
-            if(number == item.matchNumber) {
-                [searchMatchItems addObject:item];
-                searchNumber = 7;
-                [searchNumbers addObject:[NSNumber numberWithInt:searchNumber]];
-            }
-        } else if([searchItem.type isEqualToString:@"Time"]) {
-            if([item.matchTime isEqualToString:searchItem.name]) {
-                [searchMatchItems addObject:item];
-                searchNumber = 8;
-                [searchNumbers addObject:[NSNumber numberWithInt:searchNumber]];
-            }
+        
+        int number = [[numFormat numberFromString:searchItem.name] intValue];
+    
+        if(number == item.teamRed1) {
+            [searchMatchItems addObject:item];
+//            searchNumber = 1;
+            [searchNumbers addObject:[NSNumber numberWithInt:1]];
+        } else if(number == item.teamRed2) {
+            [searchMatchItems addObject:item];
+//            searchNumber = 2;
+            [searchNumbers addObject:[NSNumber numberWithInt:2]];
+        } else if(number == item.teamRed3) {
+            [searchMatchItems addObject:item];
+//            searchNumber = 3;
+            [searchNumbers addObject:[NSNumber numberWithInt:3]];
+        } else if(number == item.teamBlue1) {
+            [searchMatchItems addObject:item];
+//            searchNumber = 4;
+            [searchNumbers addObject:[NSNumber numberWithInt:4]];
+        } else if(number == item.teamBlue2) {
+            [searchMatchItems addObject:item];
+//            searchNumber = 5;
+            [searchNumbers addObject:[NSNumber numberWithInt:5]];
+        } else if(number == item.teamBlue3) {
+            [searchMatchItems addObject:item];
+//            searchNumber = 6;
+            [searchNumbers addObject:[NSNumber numberWithInt:6]];
         }
     }
 }
@@ -137,13 +124,13 @@
     searchNumbers = [[NSMutableArray alloc] init];
     displayResults = NO;
     
-    NSMutableArray* scopeButtonTitles = [[NSMutableArray alloc] init];
-    [scopeButtonTitles addObject:@"All"];
-    [scopeButtonTitles addObject:@"Robots"];
-    [scopeButtonTitles addObject:@"Matches"];
-    [scopeButtonTitles addObject:@"Times"];
-    
-    self.searchDisplayController.searchBar.scopeButtonTitles = scopeButtonTitles;
+//    NSMutableArray* scopeButtonTitles = [[NSMutableArray alloc] init];
+//    [scopeButtonTitles addObject:@"All"];
+//    [scopeButtonTitles addObject:@"Robots"];
+//    [scopeButtonTitles addObject:@"Matches"];
+//    [scopeButtonTitles addObject:@"Times"];
+//    
+//    self.searchDisplayController.searchBar.scopeButtonTitles = scopeButtonTitles;
     
     UINib* nib = [UINib nibWithNibName:@"SDScheduleCell" bundle:nil];
     
@@ -185,6 +172,7 @@
     // Return the number of sections.
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         NSArray* sections = [[SDSearchStore sharedStore] order];
+//        return 1;
         return [sections count];
     } else {
         return 1;
@@ -197,6 +185,7 @@
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         NSArray* sections = [[SDSearchStore sharedStore] order];
         return [[sections objectAtIndex:section] count];
+        
     } else if(displayResults) {
         return [searchMatchItems count];
     } else {
@@ -206,10 +195,11 @@
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(tableView == self.searchDisplayController.searchResultsTableView) {
+        return @"";
         NSArray* sectionNames = [[SDSearchStore sharedStore] sectionNames];
         return (NSString*)[sectionNames objectAtIndex:section];
     } else {
-        NSString* eventTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"AerialScoutEventPrefKey"];
+        NSString* eventTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutEventPrefKey"];
         return [NSString stringWithFormat:@"%@", [eventTitle uppercaseString]];
     }
 }
@@ -218,6 +208,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString* cellIdentifier = @"SearchCell";
+    
     if(tableView == self.searchDisplayController.searchResultsTableView) {
         NSArray* sections = [[SDSearchStore sharedStore] order];
         SDSearch* search = [[sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -294,12 +285,12 @@
                     [[cell blue3Label] setText:[NSString stringWithFormat:@"%d", cellSchedule.teamBlue3]];
                     [cell blue3Label].backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
                     break;
-                case 7:
-                    [cell matchNumberLabel].backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
-                    break;
-                case 8:
-                    [cell matchTimeLabel].backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
-                    break;
+//                case 7:
+//                    [cell matchNumberLabel].backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
+//                    break;
+//                case 8:
+//                    [cell matchTimeLabel].backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
+//                    break;
                 default:
                     break;
             }
@@ -350,6 +341,8 @@
 
 - (void) updateFilteredContentForSearchString:(NSString*)searchString searchType:(NSString*)searchType {
     
+    NSLog(@"UpdateFilteredContent searchString=%@", searchString);
+    
     self.searchResults = [[SDSearchStore sharedStore].all mutableCopy];
     
     NSString* strippedStr = [searchString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -374,6 +367,8 @@
     
     NSCompoundPredicate* finalCompoundPredicate = nil;
     
+    NSLog(@"searchType=%@", searchType);
+    
     if(searchType != nil) {
         if(andMatchPredicates.count > 0) {
             NSCompoundPredicate* compPredicate1 = (NSCompoundPredicate*)[NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
@@ -394,28 +389,31 @@
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     
-    NSString* scope;
+//    NSString* scope;
     
-    NSInteger selectedScopeButtonIndex = [self.searchDisplayController.searchBar selectedScopeButtonIndex];
-    scope = (selectedScopeButtonIndex == 1) ? @"Robot" :
-            (selectedScopeButtonIndex == 2) ? @"Match" :
-            (selectedScopeButtonIndex == 3) ? @"Time":
-                                              nil;
+//    NSInteger selectedScopeButtonIndex = [self.searchDisplayController.searchBar selectedScopeButtonIndex];
+//    scope = (selectedScopeButtonIndex == 1) ? @"Robot" :
+//            (selectedScopeButtonIndex == 2) ? @"Match" :
+//            (selectedScopeButtonIndex == 3) ? @"Time":
+//                                              nil;
+//    [self updateFilteredContentForSearchString:searchString searchType:scope];
     
-    [self updateFilteredContentForSearchString:searchString searchType:scope];
+    [self updateFilteredContentForSearchString:searchString searchType:nil];
     [[SDSearchStore sharedStore] filterArray:self.searchResults];
     return YES;
 }
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
     NSString* searchString = [self.searchDisplayController.searchBar text];
-    NSString* scope;
-    
-    scope = (searchOption == 1) ? @"Robot" :
-            (searchOption == 2) ? @"Match" :
-            (searchOption == 3) ? @"Time" : nil;
-    
-    [self updateFilteredContentForSearchString:searchString searchType:scope];
+//    NSString* scope;
+//    
+//    scope = (searchOption == 1) ? @"Robot" :
+//            (searchOption == 2) ? @"Match" :
+//            (searchOption == 3) ? @"Time" : nil;
+//    
+//    [self updateFilteredContentForSearchString:searchString searchType:scope];
+
+    [self updateFilteredContentForSearchString:searchString searchType:nil];
     [[SDSearchStore sharedStore] filterArray:self.searchResults];
     return YES;
 }
@@ -426,13 +424,15 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray* sections = [[SDSearchStore sharedStore] order];
-    searchItem = [[sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    [self.searchDisplayController setActive:NO animated:YES];
-    self.searchDisplayController.searchBar.text = searchItem.name;
-    displayResults = YES;
-    [self searchSchedule];
-    [self.tableView reloadData];
+    if(tableView == self.searchDisplayController.searchResultsTableView) {
+        NSArray* sections = [[SDSearchStore sharedStore] order];
+        searchItem = [[sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        [self.searchDisplayController setActive:NO animated:YES];
+        self.searchDisplayController.searchBar.text = searchItem.name;
+        displayResults = YES;
+        [self searchSchedule];
+        [self.tableView reloadData];
+    }
 }
 
 
