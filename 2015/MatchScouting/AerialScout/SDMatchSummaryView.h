@@ -38,6 +38,7 @@
     __weak IBOutlet UILabel* teleTotesScoredLabel;
     __weak IBOutlet UILabel* teleContainerLevelLabel;
     __weak IBOutlet UILabel* teleContainersScoredLabel;
+    __weak IBOutlet UILabel* teleLitterScoredLabel;
 
 }
 

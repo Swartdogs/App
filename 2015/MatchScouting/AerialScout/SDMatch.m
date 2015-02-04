@@ -11,7 +11,7 @@
 
 @implementation SDMatch
 
-@synthesize teamNumber, matchNumber, isCompleted, noShow, autoRobot, autoContainers, autoTotes, autoHandling, autoStep, teleTotesFrom, teleToteMax, teleTotesScored, teleContainerMax, teleContainersScored, finalScore, finalPenalty, finalRobot;
+@synthesize teamNumber, matchNumber, isCompleted, noShow, autoRobot, autoContainers, autoTotes, autoHandling, autoStep, teleTotesFrom, teleToteMax, teleTotesScored, teleContainerMax, teleContainersScored, teleLitterScored, finalScore, finalPenalty, finalRobot;
 
 - (id) init {
     if (self = [super init]) {
@@ -46,6 +46,7 @@
         self.teleTotesScored        = copy.teleTotesScored;
         self.teleContainerMax       = copy.teleContainerMax;
         self.teleContainersScored   = copy.teleContainersScored;
+        self.teleLitterScored       = copy.teleLitterScored;
 
         // Final
         
@@ -83,6 +84,7 @@
         self.teleTotesScored        = [aDecoder decodeIntForKey:@"teleTotesScored"];
         self.teleContainerMax       = [aDecoder decodeIntForKey:@"teleContainerMax"];
         self.teleContainersScored   = [aDecoder decodeIntForKey:@"teleContainersScored"];
+        self.teleLitterScored       = [aDecoder decodeIntForKey:@"teleLitterScored"];
 
     // Final
     
@@ -120,6 +122,7 @@
     [aCoder encodeInt:teleTotesScored       forKey:@"teleTotesScored"];
     [aCoder encodeInt:teleContainerMax      forKey:@"teleContainerMax"];
     [aCoder encodeInt:teleContainersScored  forKey:@"teleContainersScored"];
+    [aCoder encodeInt:teleLitterScored      forKey:@"teleLitterScored"];
     
     // Final
     
@@ -155,6 +158,7 @@
     self.teleTotesScored        = 0;
     self.teleContainerMax       = 0;
     self.teleContainersScored   = 0;
+    self.teleLitterScored       = 0;
     
     // Final
     
@@ -165,7 +169,7 @@
 }
 
 + (NSString*) writeHeader {
-    return [NSString stringWithFormat:@"Team Number, Match Number, Is Completed, No Show, Auto Robot, Auto Containers, Auto Totes, Auto Handling, Auto Step, Tele Totes From, Tele Totes Max, Tele Totes Scored, Tele Containers Max, Tele Containers Scored, Penalties, Robot Issues, Final Score \r\n"];
+    return [NSString stringWithFormat:@"Team Number, Match Number, Is Completed, No Show, Auto Robot, Auto Containers, Auto Totes, Auto Handling, Auto Step, Tele Totes From, Tele Totes Max, Tele Totes Scored, Tele Containers Max, Tele Containers Scored, teleLitterScored, Penalties, Robot Issues, Final Score \r\n"];
 }
 
 - (NSString*) writeMatch {
@@ -179,7 +183,7 @@
         
     } else {
         // need "%i" for everything that will appear in excel
-        return [NSString stringWithFormat:@"  %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i  \r\n",
+        return [NSString stringWithFormat:@"  %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i  \r\n",
         
         // Match
                 
@@ -203,6 +207,7 @@
         self.teleTotesScored,
         self.teleContainerMax,
         self.teleContainersScored,
+        self.teleLitterScored,
          
         // Final
                 

@@ -31,6 +31,8 @@
                 break;
         case 3: match.teleContainersScored = value;
                 break;
+        case 4: match.teleLitterScored = value;
+                break;
         default:;
     }
 }
@@ -114,6 +116,10 @@
     teleContainersScored.delegate = self;
     [teleContainersScored.minusButton setColor];
     [teleContainersScored.plusButton setColor];
+    
+    teleLitterScored.delegate = self;
+    [teleLitterScored.minusButton setColor];
+    [teleLitterScored.plusButton setColor];
 }
 
 - (void) viewDidUnload {
@@ -143,6 +149,7 @@
     [teleTotesScored        initStepperValue:match.teleTotesScored Minimum:0 Maximum:70];
     [teleContainerMax       initStepperValue:match.teleContainerMax Minimum:0 Maximum:6];
     [teleContainersScored   initStepperValue:match.teleContainersScored Minimum:0 Maximum:7];
+    [teleLitterScored       initStepperValue:match.teleLitterScored Minimum:0 Maximum:7];
     
     self.navigationController.toolbar.translucent = NO;
     [[self navigationController] setToolbarHidden:NO animated:NO];

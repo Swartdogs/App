@@ -18,6 +18,7 @@
                 <outlet property="finalRobotIssuesLabel" destination="pFr-fa-GpP" id="MLv-Lk-VMg"/>
                 <outlet property="teleContainerLevelLabel" destination="IzF-M2-nhP" id="6s6-tR-vTG"/>
                 <outlet property="teleContainersScoredLabel" destination="7KP-3P-gxT" id="WUS-zf-yHS"/>
+                <outlet property="teleLitterScoredLabel" destination="BUy-oo-9wJ" id="l9e-8G-wsx"/>
                 <outlet property="teleToteLevelLabel" destination="SyI-qC-SvL" id="WZh-2Y-A4Y"/>
                 <outlet property="teleTotesFromLabel" destination="5HO-wD-xeq" id="0PX-sh-uDi"/>
                 <outlet property="teleTotesScoredLabel" destination="08S-Qv-xIQ" id="ZtG-Jg-14F"/>
@@ -246,7 +247,7 @@
             <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <point key="canvasLocation" x="148" y="511"/>
+            <point key="canvasLocation" x="248" y="477"/>
         </scrollView>
     </objects>
     <resources>

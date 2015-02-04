@@ -21,6 +21,7 @@
     __weak IBOutlet SDResizeStepperView* teleContainersScored;
     __weak IBOutlet SDResizeStepperView* teleToteMax;
     __weak IBOutlet SDResizeStepperView* teleTotesScored;
+    __weak IBOutlet SDResizeStepperView* teleLitterScored;
 }
     
 @property (nonatomic, retain) IBOutletCollection(SDGradientButton) NSArray* TotesFromButtons;

@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="teleContainerMax" destination="TWe-Wp-qt0" id="4EU-AQ-XBc"/>
                 <outlet property="teleContainersScored" destination="s5a-Ki-Ufn" id="WEo-Re-fXX"/>
+                <outlet property="teleLitterScored" destination="kZo-Ia-qgG" id="j2i-w4-66i"/>
                 <outlet property="teleToteMax" destination="ObB-Oi-koV" id="ZyA-qm-lnq"/>
                 <outlet property="teleTotesScored" destination="CLe-7t-nvC" id="ZaI-wR-qFn"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -328,7 +329,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8K0-Oy-wwl" customClass="SDGradientButton">
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8K0-Oy-wwl" customClass="SDGradientButton">
                                     <rect key="frame" x="239" y="5" width="45" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -340,7 +341,7 @@
                                         <action selector="plusButtonTap:" destination="kZo-Ia-qgG" eventType="touchDown" id="wx4-cZ-CS0"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ctn-dG-eoy" customClass="SDGradientButton">
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ctn-dG-eoy" customClass="SDGradientButton">
                                     <rect key="frame" x="184" y="5" width="45" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

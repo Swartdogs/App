@@ -3,7 +3,6 @@
 //  RecycleScout
 //
 //  Created by Srinivas Dhanwada on 1/6/14.
-//  Made worse by Seth Harwood 1/27/15.
 //  Copyright (c) 2014 Srinivas Dhanwada. All rights reserved.
 //
 
@@ -98,6 +97,7 @@
     teleTotesScoredLabel        = nil;
     teleContainerLevelLabel     = nil;
     teleContainersScoredLabel   = nil;
+    teleLitterScoredLabel       = nil;
     
     [super viewDidUnload];
 }
@@ -146,6 +146,7 @@
         teleTotesScoredLabel.text       = @"";
         teleContainerLevelLabel.text    = @"";
         teleContainersScoredLabel.text  = @"";
+        teleLitterScoredLabel.text      = @"";
         
         return;
     }
@@ -193,6 +194,7 @@
     teleTotesScoredLabel.text       = [NSString stringWithFormat:@"%i", match.teleTotesScored];
     teleContainerLevelLabel.text    = [NSString stringWithFormat:@"%i", match.teleContainerMax];
     teleContainersScoredLabel.text  = [NSString stringWithFormat:@"%i", match.teleContainersScored];
+    teleLitterScoredLabel.text      = [NSString stringWithFormat:@"%i", match.teleLitterScored];
 }
 
 - (void)didReceiveMemoryWarning

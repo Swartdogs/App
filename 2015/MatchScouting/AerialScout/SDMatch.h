@@ -33,6 +33,7 @@
 @property (nonatomic) int teleTotesScored;
 @property (nonatomic) int teleContainerMax;
 @property (nonatomic) int teleContainersScored;
+@property (nonatomic) int teleLitterScored;
 
 // Final
 
