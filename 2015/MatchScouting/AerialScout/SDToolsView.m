@@ -139,9 +139,9 @@
     self.navigationItem.titleView = myTitle.view;
     [[myTitle matchLabel] setText:@"File Upload"];
     
-    NSString* hostName = [[NSUserDefaults standardUserDefaults] objectForKey:@"AerialScoutHostPrefKey"];
-    NSString* userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"AerialScoutUserNamePrefKey"];
-    NSString* userPassword = [[NSUserDefaults standardUserDefaults] objectForKey:@"AerialScoutUserPasswordPrefKey"];
+    NSString* hostName = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutHostPrefKey"];
+    NSString* userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutUserNamePrefKey"];
+    NSString* userPassword = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutUserPasswordPrefKey"];
     
     [hostField setText:hostName];
     [userNameField setText:userName];
@@ -184,9 +184,9 @@
 }
 
 - (IBAction) settingsEdit:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:[hostField text] forKey:@"AerialScoutHostPrefKey"];
-    [[NSUserDefaults standardUserDefaults] setObject:[userNameField text] forKey:@"AerialScoutUserNamePrefKey"];
-    [[NSUserDefaults standardUserDefaults] setObject:[userPassField text] forKey:@"AerialScoutUserPasswordPrefKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:[hostField text] forKey:@"ScoutHostPrefKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:[userNameField text] forKey:@"ScoutUserNamePrefKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:[userPassField text] forKey:@"ScoutUserPasswordPrefKey"];
 }
 
 - (void)didReceiveMemoryWarning

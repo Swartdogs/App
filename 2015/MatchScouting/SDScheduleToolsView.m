@@ -63,12 +63,7 @@
         newMatch = [matchStore createMatch];
         newMatch.matchNumber = scheduleItem.matchNumber;
         newMatch.isCompleted |= 1;
-//        if(buildGroup < 3) {
-//            newMatch.alliance = 0;
-//        } else {
-//            newMatch.alliance = 1;
-//        }
-        
+
         switch(buildGroup) {
             case 0: newMatch.teamNumber = scheduleItem.teamRed1; break;
             case 1: newMatch.teamNumber = scheduleItem.teamRed2; break;
@@ -312,7 +307,7 @@
     self.navigationItem.titleView = myTitle.view;
     [[myTitle matchLabel] setText:@"Tools"];
     
-    //NSString* eventID = [[NSUserDefaults standardUserDefaults] objectForKey:@"AerialScoutEventIdPrefKey"];
+    //NSString* eventID = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutEventIdPrefKey"];
 
     [getStartButton setEnabled:NO];
     
@@ -332,7 +327,7 @@
 
 - (IBAction) buildList:(id)sender {
     if([[[SDMatchStore sharedStore] allMatches] count] > 0) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Aerial Match" message:@"Building a Scout List will delete the existing Matches in the List. Proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Recycle Match" message:@"Building a Scout List will delete the existing Matches in the List. Proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
         
         alertView.tag = 1;
         [alertView show];
@@ -374,7 +369,7 @@
         urlPath = nil;
     } else {
     
-        NSString* url = @"http://www2.usfirst.org/2014comp/events/";
+        NSString* url = @"http://www2.usfirst.org/2015comp/events/";
         url = [url stringByAppendingString:[[SDEventStore sharedStore] selectedID]];
         url = [url stringByAppendingString:@"/schedulequal.html"];
         urlPath = [self smartURLForString:url];

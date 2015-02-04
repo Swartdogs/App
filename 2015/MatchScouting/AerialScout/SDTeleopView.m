@@ -100,6 +100,7 @@
     teleTotesScored.ScoreLabel.layer.cornerRadius       = 5.0f;
     teleContainerMax.ScoreLabel.layer.cornerRadius      = 5.0f;
     teleContainersScored.ScoreLabel.layer.cornerRadius  = 5.0f;
+    teleLitterScored.ScoreLabel.layer.cornerRadius      = 5.0f;
 
     teleToteMax.delegate = self;
     [teleToteMax.minusButton setColor];
