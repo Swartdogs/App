@@ -118,7 +118,7 @@
     // Add each match to the String
     
     for (SDMatch* match in allMatches) {
-        if (match.isCompleted == 31) {
+        if (match.isCompleted == 15) {
             [csvFileString appendString:[match writeMatch]];
         }
     }

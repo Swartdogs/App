@@ -124,7 +124,7 @@
         if([[SDViewServer getInstance] matchEdit]) {
             match.noShow = 0;
         } else {
-            match.isCompleted = 31;
+            match.isCompleted = 15;
         }
     }
     

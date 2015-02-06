@@ -3,37 +3,37 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AerialScoutIcon29.png",
+      "filename" : "Recycle Scout Icon 29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AerialScoutIcon29x2.png",
+      "filename" : "Recycle Scout Icon 58.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AerialScoutIcon40x2.png",
+      "filename" : "Recycle Scout Icon 80.png",
       "scale" : "2x"
     },
     {
       "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "AerialScoutIcon57.png",
+      "filename" : "Recycle Scout Icon 57.png",
       "scale" : "1x"
     },
     {
       "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "AerialScoutIcon57x2.png",
+      "filename" : "Recycle Scout Icon 114.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AerialScoutIcon120-13.png",
+      "filename" : "Recycle Scout Icon 120.png",
       "scale" : "2x"
     },
     {
@@ -44,61 +44,61 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon29-1.png",
+      "filename" : "Recycle Scout Icon 29-1.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon29x2-1.png",
+      "filename" : "Recycle Scout Icon 58-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon40.png",
+      "filename" : "Recycle Scout Icon 40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon40x2-1.png",
+      "filename" : "Recycle Scout Icon 80-1.png",
       "scale" : "2x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon50.png",
+      "filename" : "Recycle Scout Icon 50.png",
       "scale" : "1x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon50x2.png",
+      "filename" : "Recycle Scout Icon 100.png",
       "scale" : "2x"
     },
     {
       "size" : "72x72",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon72.png",
+      "filename" : "Recycle Scout Icon 72.png",
       "scale" : "1x"
     },
     {
       "size" : "72x72",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon72x2.png",
+      "filename" : "Recycle Scout Icon 144.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon76.png",
+      "filename" : "Recycle Scout Icon 76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "AerialScoutIcon76x2.png",
+      "filename" : "Recycle Scout Icon 152.png",
       "scale" : "2x"
     }
   ],

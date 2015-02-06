@@ -169,12 +169,12 @@
 }
 
 + (NSString*) writeHeader {
-    return [NSString stringWithFormat:@"Team Number, Match Number, Is Completed, No Show, Auto Robot, Auto Containers, Auto Totes, Auto Handling, Auto Step, Tele Totes From, Tele Totes Max, Tele Totes Scored, Tele Containers Max, Tele Containers Scored, teleLitterScored, Penalties, Robot Issues, Final Score \r\n"];
+    return [NSString stringWithFormat:@"Team Number, Match Number, Is Completed, No Show, Auto Robot, Auto Containers, Auto Totes, Auto Handling, Auto Step, Tele Totes From, Tele Totes Max, Tele Totes Scored, Tele Containers Max, Tele Containers Scored, Tele Litter Scored, Penalties, Robot Issues, Final Score \r\n"];
 }
 
 - (NSString*) writeMatch {
     if(self.noShow == 1) {
-        return [NSString stringWithFormat:@"  %i, %i, %i, %i, , , , , , , , , , , , ,  \r\n",
+        return [NSString stringWithFormat:@"  %i, %i, %i, %i, , , , , , , , , , , , , , ,  \r\n",
         
         self.teamNumber,
         self.matchNumber,

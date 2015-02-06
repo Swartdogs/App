@@ -210,7 +210,11 @@
         return @"";
     } else {
         NSString* eventTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutEventPrefKey"];
-        return [NSString stringWithFormat:@"%@", [eventTitle uppercaseString]];
+        if (eventTitle == nil) {
+            return @"";
+        } else {
+            return [NSString stringWithFormat:@"%@", [eventTitle uppercaseString]];
+        }
     }
 }
 
