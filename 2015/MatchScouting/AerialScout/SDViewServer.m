@@ -81,8 +81,6 @@
 - (void) defineNavButtonsFor:(UIViewController *)viewController viewIndex:(NSInteger)vIndex completed:(int)isCompleted {
     // Configure navigation buttons for the five match Views
     
-    [[viewController navigationItem] setHidesBackButton:YES animated:NO];
-    
     UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:viewController action:@selector(saveMatch:)];
     
     [[viewController navigationItem] setRightBarButtonItem:doneItem animated:NO];
@@ -179,19 +177,15 @@
             break;
     }
     
-    if(oIndex == -1) {
-        newViewList = [NSArray arrayWithObjects:[viewList objectAtIndex:0], newView, nil];
-        [navControl setViewControllers:newViewList animated:YES];
-        
-    } else if(nIndex < oIndex) {
+    if (nIndex < oIndex) {
         newViewList = [NSArray arrayWithObjects:[viewList objectAtIndex:0],
                        newView, [viewList objectAtIndex:[viewList count] - 1], nil];
-        [navControl setViewControllers:newViewList animated:YES];
+        
+        [navControl setViewControllers:newViewList animated:NO];
         [navControl popViewControllerAnimated:YES];
         
     } else {
-        newViewList = [NSArray arrayWithObjects:[viewList objectAtIndex:0], newView, nil];
-        [navControl setViewControllers:newViewList animated:YES];
+        [navControl pushViewController:newView animated:YES];
     }
 }
 

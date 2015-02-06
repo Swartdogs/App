@@ -34,13 +34,13 @@
 @property (nonatomic) int teleContainerMax;
 @property (nonatomic) int teleContainersScored;
 @property (nonatomic) int teleLitterScored;
+@property (nonatomic) int teleCoopertition;
 
 // Final
 
 @property (nonatomic) int finalScore;
 @property (nonatomic) int finalPenalty;
 @property (nonatomic) int finalRobot;
-@property (nonatomic) int coopertition;
 
 + (NSString*) writeHeader;
 

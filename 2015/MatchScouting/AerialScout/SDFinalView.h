@@ -13,16 +13,15 @@
 
 @class SDMatch;
 
-@interface SDFinalView : UIViewController <UIAlertViewDelegate> {
+@interface SDFinalView : UIViewController <UIAlertViewDelegate, SDResizeStepperViewDelegate> {
     SDMatch* match;
     SDMatch* origMatch;
     
     bool keypadShown;
     
-    __weak IBOutlet UITextField* finalScoreField;
-    __weak IBOutlet UILabel*     scoreFlag;
-    __weak IBOutlet SDResizeStepperView* coopertition;
-    
+    __weak IBOutlet UITextField*         finalScoreField;
+    __weak IBOutlet UILabel*             scoreFlag;
+    __weak IBOutlet SDResizeStepperView* teleCoopertition;
 }
 
 @property (nonatomic, retain) IBOutletCollection(SDGradientButton) NSArray* penaltyButtons;

@@ -24,6 +24,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="173" y="267"/>
         </view>
     </objects>
     <resources>

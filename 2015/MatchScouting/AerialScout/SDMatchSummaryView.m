@@ -98,6 +98,7 @@
     teleContainerLevelLabel     = nil;
     teleContainersScoredLabel   = nil;
     teleLitterScoredLabel       = nil;
+    teleCoopertitionLabel       = nil;
     
     [super viewDidUnload];
 }
@@ -147,6 +148,7 @@
         teleContainerLevelLabel.text    = @"";
         teleContainersScoredLabel.text  = @"";
         teleLitterScoredLabel.text      = @"";
+        teleCoopertitionLabel.text      = @"";
         
         return;
     }
@@ -195,6 +197,7 @@
     teleContainerLevelLabel.text    = [NSString stringWithFormat:@"%i", match.teleContainerMax];
     teleContainersScoredLabel.text  = [NSString stringWithFormat:@"%i", match.teleContainersScored];
     teleLitterScoredLabel.text      = [NSString stringWithFormat:@"%i", match.teleLitterScored];
+    teleCoopertitionLabel.text      = [NSString stringWithFormat:@"%i", match.teleCoopertition];
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,7 +11,7 @@
 
 @implementation SDMatch
 
-@synthesize teamNumber, matchNumber, isCompleted, noShow, autoRobot, autoContainers, autoTotes, autoHandling, autoStep, teleTotesFrom, teleToteMax, teleTotesScored, teleContainerMax, teleContainersScored, teleLitterScored, finalScore, finalPenalty, finalRobot, coopertition;
+@synthesize teamNumber, matchNumber, isCompleted, noShow, autoRobot, autoContainers, autoTotes, autoHandling, autoStep, teleTotesFrom, teleToteMax, teleTotesScored, teleContainerMax, teleContainersScored, teleLitterScored, teleCoopertition, finalScore, finalPenalty, finalRobot;
 
 - (id) init {
     if (self = [super init]) {
@@ -47,13 +47,13 @@
         self.teleContainerMax       = copy.teleContainerMax;
         self.teleContainersScored   = copy.teleContainersScored;
         self.teleLitterScored       = copy.teleLitterScored;
+        self.teleCoopertition       = copy.teleCoopertition;
 
         // Final
         
         self.finalScore            = copy.finalScore;
         self.finalPenalty          = copy.finalPenalty;
         self.finalRobot            = copy.finalRobot;
-        self.coopertion            = copy.coopertition;
     }
     
     return self;
@@ -86,14 +86,13 @@
         self.teleContainerMax       = [aDecoder decodeIntForKey:@"teleContainerMax"];
         self.teleContainersScored   = [aDecoder decodeIntForKey:@"teleContainersScored"];
         self.teleLitterScored       = [aDecoder decodeIntForKey:@"teleLitterScored"];
-
+        self.teleCoopertition       = [aDecoder decodeIntForKey:@"teleCoopertition"];
+        
     // Final
     
         self.finalScore             = [aDecoder decodeIntForKey:@"finalScore"];
         self.finalPenalty           = [aDecoder decodeIntForKey:@"finalPenalty"];
         self.finalRobot             = [aDecoder decodeIntForKey:@"finalRobot"];
-        self.coopertion             = [aDecoder decodeIntForKey:@"coopertition"];
-    
     }
     
     return self;
@@ -125,13 +124,13 @@
     [aCoder encodeInt:teleContainerMax      forKey:@"teleContainerMax"];
     [aCoder encodeInt:teleContainersScored  forKey:@"teleContainersScored"];
     [aCoder encodeInt:teleLitterScored      forKey:@"teleLitterScored"];
+    [aCoder encodeInt:teleCoopertition      forKey:@"teleCoopertition"];
     
     // Final
     
     [aCoder encodeInt:finalScore            forKey:@"finalScore"];
     [aCoder encodeInt:finalPenalty          forKey:@"finalPenalty"];
     [aCoder encodeInt:finalRobot            forKey:@"finalRobot"];
-    [aCoder encodeInt:coopertition          forKey:@"coopertition"];
 }
 
 - (void) setToDefaults {
@@ -162,18 +161,17 @@
     self.teleContainerMax       = 0;
     self.teleContainersScored   = 0;
     self.teleLitterScored       = 0;
+    self.teleCoopertition       = 0;
     
     // Final
     
     self.finalScore             = -1;
     self.finalPenalty           = 0;
     self.finalRobot             = 0;
-    self.coopertition           = 0;
-    
 }
 
 + (NSString*) writeHeader {
-    return [NSString stringWithFormat:@"Team Number, Match Number, Is Completed, No Show, Auto Robot, Auto Containers, Auto Totes, Auto Handling, Auto Step, Tele Totes From, Tele Totes Max, Tele Totes Scored, Tele Containers Max, Tele Containers Scored, Tele Litter Scored, Penalties, Robot Issues, Final Score, coopertition \r\n"];
+    return [NSString stringWithFormat:@"Team Number, Match Number, Is Completed, No Show, Auto Robot, Auto Containers, Auto Totes, Auto Handling, Auto Step, Tele Totes From, Tele Totes Max, Tele Totes Scored, Tele Containers Max, Tele Containers Scored, Tele Litter Scored, Tele Coopertition, Penalties, Robot Issues, Final Score \r\n"];
 }
 
 - (NSString*) writeMatch {
@@ -187,7 +185,7 @@
         
     } else {
         // need "%i" for everything that will appear in excel
-        return [NSString stringWithFormat:@"  %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i,%i, %i, %i, %i, %i, %i  \r\n",
+        return [NSString stringWithFormat:@"  %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i  \r\n",
         
         // Match
                 
@@ -212,13 +210,13 @@
         self.teleContainerMax,
         self.teleContainersScored,
         self.teleLitterScored,
+        self.teleCoopertition,
          
         // Final
                 
         self.finalPenalty,
         self.finalRobot,
-        self.finalScore,
-        self.coopertition];
+        self.finalScore];
     }
 }
 

@@ -10,6 +10,8 @@
 		281EF49D18E26F0C000F12B4 /* SDMatchScheduleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281EF49B18E26F0C000F12B4 /* SDMatchScheduleView.m */; };
 		281EF49E18E26F0C000F12B4 /* SDMatchScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281EF49C18E26F0C000F12B4 /* SDMatchScheduleView.xib */; };
 		2827D0221A81044700E3B014 /* Litter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2827D0211A81044700E3B014 /* Litter.png */; };
+		2832BB261A84EF4900E1C748 /* Recycle About Page.png in Resources */ = {isa = PBXBuildFile; fileRef = 2832BB251A84EF4900E1C748 /* Recycle About Page.png */; };
+		2832BB281A84F2F700E1C748 /* Stacked Coopertition.png in Resources */ = {isa = PBXBuildFile; fileRef = 2832BB271A84F2F700E1C748 /* Stacked Coopertition.png */; };
 		284BEE3F1A83BB560019A800 /* Recycle Scout Icon 152.png in Resources */ = {isa = PBXBuildFile; fileRef = 284BEE3E1A83BB560019A800 /* Recycle Scout Icon 152.png */; };
 		285FFE0E1A83A3460080BDD1 /* Orange Launch 320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = 285FFE031A83A3460080BDD1 /* Orange Launch 320x480.png */; };
 		285FFE0F1A83A3460080BDD1 /* Orange Launch 640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 285FFE041A83A3460080BDD1 /* Orange Launch 640x960.png */; };
@@ -35,7 +37,6 @@
 		285FFE301A83A7370080BDD1 /* Recycle Scout Icon 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 285FFE231A83A7370080BDD1 /* Recycle Scout Icon 120.png */; };
 		285FFE311A83A7370080BDD1 /* Recycle Scout Icon 144.png in Resources */ = {isa = PBXBuildFile; fileRef = 285FFE241A83A7370080BDD1 /* Recycle Scout Icon 144.png */; };
 		285FFE321A83A7370080BDD1 /* Recycle Scout Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 285FFE251A83A7370080BDD1 /* Recycle Scout Icon.png */; };
-		28758B721A84594B00D797E8 /* Recycle About Page.png in Resources */ = {isa = PBXBuildFile; fileRef = 28758B711A84594B00D797E8 /* Recycle About Page.png */; };
 		28780E621A7E3B700040C8B4 /* GrayTote.png in Resources */ = {isa = PBXBuildFile; fileRef = 28780E611A7E3B700040C8B4 /* GrayTote.png */; };
 		28780E641A7E3B800040C8B4 /* RecyclingContainer.png in Resources */ = {isa = PBXBuildFile; fileRef = 28780E631A7E3B800040C8B4 /* RecyclingContainer.png */; };
 		28780E661A7E3B8E0040C8B4 /* YellowTote.png in Resources */ = {isa = PBXBuildFile; fileRef = 28780E651A7E3B8E0040C8B4 /* YellowTote.png */; };
@@ -104,6 +105,8 @@
 		281EF49B18E26F0C000F12B4 /* SDMatchScheduleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMatchScheduleView.m; sourceTree = "<group>"; };
 		281EF49C18E26F0C000F12B4 /* SDMatchScheduleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SDMatchScheduleView.xib; sourceTree = "<group>"; };
 		2827D0211A81044700E3B014 /* Litter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Litter.png; sourceTree = "<group>"; };
+		2832BB251A84EF4900E1C748 /* Recycle About Page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Recycle About Page.png"; sourceTree = "<group>"; };
+		2832BB271A84F2F700E1C748 /* Stacked Coopertition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stacked Coopertition.png"; sourceTree = "<group>"; };
 		284BEE3E1A83BB560019A800 /* Recycle Scout Icon 152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Recycle Scout Icon 152.png"; sourceTree = "<group>"; };
 		285FFE031A83A3460080BDD1 /* Orange Launch 320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Orange Launch 320x480.png"; sourceTree = "<group>"; };
 		285FFE041A83A3460080BDD1 /* Orange Launch 640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Orange Launch 640x960.png"; sourceTree = "<group>"; };
@@ -129,7 +132,6 @@
 		285FFE231A83A7370080BDD1 /* Recycle Scout Icon 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Recycle Scout Icon 120.png"; sourceTree = "<group>"; };
 		285FFE241A83A7370080BDD1 /* Recycle Scout Icon 144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Recycle Scout Icon 144.png"; sourceTree = "<group>"; };
 		285FFE251A83A7370080BDD1 /* Recycle Scout Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Recycle Scout Icon.png"; sourceTree = "<group>"; };
-		28758B711A84594B00D797E8 /* Recycle About Page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Recycle About Page.png"; sourceTree = "<group>"; };
 		28780E611A7E3B700040C8B4 /* GrayTote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GrayTote.png; sourceTree = "<group>"; };
 		28780E631A7E3B800040C8B4 /* RecyclingContainer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecyclingContainer.png; sourceTree = "<group>"; };
 		28780E651A7E3B8E0040C8B4 /* YellowTote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTote.png; sourceTree = "<group>"; };
@@ -246,12 +248,14 @@
 		28780E601A7E3A990040C8B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				28758B711A84594B00D797E8 /* Recycle About Page.png */,
-				2827D0211A81044700E3B014 /* Litter.png */,
 				28780E671A7E43830040C8B4 /* 2014_525.png */,
-				28780E651A7E3B8E0040C8B4 /* YellowTote.png */,
-				28780E631A7E3B800040C8B4 /* RecyclingContainer.png */,
+				D78976F61880909D00207CEC /* black-checkmark.png */,
 				28780E611A7E3B700040C8B4 /* GrayTote.png */,
+				2827D0211A81044700E3B014 /* Litter.png */,
+				2832BB251A84EF4900E1C748 /* Recycle About Page.png */,
+				28780E631A7E3B800040C8B4 /* RecyclingContainer.png */,
+				2832BB271A84F2F700E1C748 /* Stacked Coopertition.png */,
+				28780E651A7E3B8E0040C8B4 /* YellowTote.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -388,7 +392,6 @@
 				D78644C0187B157600089901 /* Images.xcassets */,
 				D7B2DA601890360D0029A7F9 /* AppIcon */,
 				D7B2DA7918903A0E0029A7F9 /* LaunchImage */,
-				D78976F61880909D00207CEC /* black-checkmark.png */,
 				D78644BD187B157600089901 /* SDAppDelegate.h */,
 				D78644BE187B157600089901 /* SDAppDelegate.m */,
 				D78644B5187B157600089901 /* Supporting Files */,
@@ -567,7 +570,7 @@
 				2827D0221A81044700E3B014 /* Litter.png in Resources */,
 				285FFE101A83A3460080BDD1 /* Orange Launch 640x1136.png in Resources */,
 				285FFE2C1A83A7370080BDD1 /* Recycle Scout Icon 76.png in Resources */,
-				28758B721A84594B00D797E8 /* Recycle About Page.png in Resources */,
+				2832BB261A84EF4900E1C748 /* Recycle About Page.png in Resources */,
 				285FFE2E1A83A7370080BDD1 /* Recycle Scout Icon 100.png in Resources */,
 				285FFE321A83A7370080BDD1 /* Recycle Scout Icon.png in Resources */,
 				285FFE281A83A7370080BDD1 /* Recycle Scout Icon 50.png in Resources */,
@@ -602,6 +605,7 @@
 				28780E621A7E3B700040C8B4 /* GrayTote.png in Resources */,
 				D75B927C187BED7E00310C35 /* SDFinalView.xib in Resources */,
 				D7C7961B18DC095B00658581 /* blue2Assist.png in Resources */,
+				2832BB281A84F2F700E1C748 /* Stacked Coopertition.png in Resources */,
 				D7C7961D18DC095B00658581 /* red1Assist.png in Resources */,
 				285FFE151A83A3460080BDD1 /* Orange Launch 1536x2008.png in Resources */,
 				285FFE181A83A3460080BDD1 /* Orange Launch 2048x1536.png in Resources */,
@@ -758,7 +762,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AerialScout/RecycleScout-Prefix.pch";
 				INFOPLIST_FILE = "AerialScout/RecycleScout-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				PRODUCT_NAME = RecycleScout;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -777,7 +781,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AerialScout/RecycleScout-Prefix.pch";
 				INFOPLIST_FILE = "AerialScout/RecycleScout-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				PRODUCT_NAME = RecycleScout;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

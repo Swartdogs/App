@@ -24,7 +24,7 @@
 
 - (void) stepView:(SDResizeStepperView *)stepView stepperTag:(int)tag newValue:(int)value{
     switch (tag) {
-        case 0: match.coopertition = value;
+        case 0: match.teleCoopertition = value;
                 break;
         default:;
     }
@@ -82,7 +82,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    teleCoopertition.ScoreLabel.layer.cornerRadius = 5.0f;
+    
+    teleCoopertition.delegate = self;
+    [teleCoopertition.minusButton setColor];
+    [teleCoopertition.plusButton setColor];
 }
 
 - (void) viewDidUnload {
@@ -109,7 +114,7 @@
     
     [scoreFlag setHidden:([[finalScoreField text] length] != 0)];
     
-    [coopertition       initStepperValue:match.coopertition Minimum:0 Maximum:4];
+    [teleCoopertition initStepperValue:match.teleCoopertition Minimum:0 Maximum:4];
     
     [(SDGradientButton*)[penaltyButtons objectAtIndex:0] setSelected:(match.finalPenalty & 1) == 1];
     [(SDGradientButton*)[penaltyButtons objectAtIndex:1] setSelected:(match.finalPenalty & 2) == 2];
@@ -117,9 +122,6 @@
     
     [(SDGradientButton*)[robotButtons objectAtIndex:0] setSelected:(match.finalRobot & 1) == 1];
     [(SDGradientButton*)[robotButtons objectAtIndex:1] setSelected:(match.finalRobot & 2) == 2];
-    
-    
-    
     
     self.navigationController.toolbar.translucent = NO;
     [[self navigationController] setToolbarHidden:NO animated:NO];
