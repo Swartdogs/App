@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SDGradientButton.h"
+#import "SDResizeStepperView.h"
 
 @class SDMatch;
 
@@ -20,6 +21,7 @@
     
     __weak IBOutlet UITextField* finalScoreField;
     __weak IBOutlet UILabel*     scoreFlag;
+    __weak IBOutlet SDResizeStepperView* coopertition;
     
 }
 
