@@ -131,6 +131,7 @@
     [toolsView setDismissBlock:^{
         displayResults = NO;
         self.searchDisplayController.searchBar.text = @"";
+        [[SDScheduleStore sharedStore] setSearchTeam:0];
         [self.tableView reloadData];
     }];
     
@@ -170,13 +171,25 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    SDTitleView* myTitle = [[SDTitleView alloc] initWithNibName:@"SDTitleView" bundle:nil];
+    if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    }
     
+    SDTitleView* myTitle = [[SDTitleView alloc] initWithNibName:@"SDTitleView" bundle:nil];
     self.navigationItem.titleView = myTitle.view;
     [[myTitle matchLabel] setText:@"Match Schedule"];
     
     self.schedule = [[SDScheduleStore sharedStore] allSchedules];
     [self buildTeamList];
+    
+    int searchTeam = [[SDScheduleStore sharedStore] getSearchTeam];
+    if (searchTeam != 0) {
+        displayResults = YES;
+        self.searchDisplayController.searchBar.text = [NSString stringWithFormat:@"%i", searchTeam];
+        [self searchSchedule:searchTeam];
+    } else {
+        displayResults = NO;
+    }
     
     [self.tableView reloadData];
 }
@@ -352,6 +365,7 @@
 
         int searchIndex = [[self.searchResults objectAtIndex:indexPath.row] intValue];
         self.searchDisplayController.searchBar.text = [NSString stringWithFormat:@"%i", searchIndex];
+        [[SDScheduleStore sharedStore] setSearchTeam:searchIndex];
         [self searchSchedule:searchIndex];
 
         [self.tableView reloadData];
@@ -382,6 +396,7 @@
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     displayResults = NO;
+    [[SDScheduleStore sharedStore] setSearchTeam:0];
     [self.tableView reloadData];
 }
 

@@ -82,7 +82,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    commentsField.delegate = self;
+    
     teleCoopertition.ScoreLabel.layer.cornerRadius = 5.0f;
     
     teleCoopertition.delegate = self;
@@ -122,6 +124,8 @@
     
     [(SDGradientButton*)[robotButtons objectAtIndex:0] setSelected:(match.finalRobot & 1) == 1];
     [(SDGradientButton*)[robotButtons objectAtIndex:1] setSelected:(match.finalRobot & 2) == 2];
+    
+    [commentsField setText:match.finalComments];
     
     self.navigationController.toolbar.translucent = NO;
     [[self navigationController] setToolbarHidden:NO animated:NO];
@@ -240,6 +244,39 @@
                                         oldIndex:4
                                        matchData:match
                                        matchCopy:origMatch];
+}
+
+- (BOOL) textView: (UITextView*) textView shouldChangeTextInRange: (NSRange) range replacementText: (NSString*) text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        [self dismissKeypad];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [self animateTextView:textView up:YES];
+
+    keypadShown = YES;
+    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self animateTextView:textView up:NO];
+    [[SDViewServer getInstance] setMatchEdit:YES];
+    match.finalComments = commentsField.text;
+}
+
+-(void)animateTextView:(UITextView*)textView up:(BOOL)up {
+    int movement = (up ? -203 : 203);
+    
+    [UIView beginAnimations: @"animateTextView" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: 0.3f];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning

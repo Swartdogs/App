@@ -12,15 +12,18 @@
 
 @interface SDScheduleStore : NSObject {
     NSMutableArray* allSchedules;
+    int             searchTeam;
 }
 
 + (SDScheduleStore*) sharedStore;
 
 - (NSArray*)    allSchedules;
 - (SDSchedule*) createSchedule;
+- (int)         getSearchTeam;
 - (void)        removeAll;
 - (void)        removeSchedule:(SDSchedule*)thisSchedule;
 - (BOOL)        saveChanges;
+- (void)        setSearchTeam:(int)team;
 - (NSString*)   scheduleArchivePath;
 
 @end

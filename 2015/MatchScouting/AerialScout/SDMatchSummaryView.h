@@ -22,6 +22,7 @@
     __weak IBOutlet UILabel* finalPointsLabel;
     __weak IBOutlet UILabel* finalPenaltyLabel;
     __weak IBOutlet UILabel* finalRobotIssuesLabel;
+    __weak IBOutlet UITextView* commentsLabel;
 
     // Auto
     

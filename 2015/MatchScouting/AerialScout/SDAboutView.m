@@ -37,10 +37,12 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    }
+    
     SDTitleView* myTitle = [[SDTitleView alloc] initWithNibName:@"SDTitleView" bundle:nil];
-    
     self.navigationItem.titleView = myTitle.view;
-    
     [[myTitle matchLabel] setText:@"About"];
 }
 

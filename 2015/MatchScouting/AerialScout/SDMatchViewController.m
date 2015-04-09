@@ -36,7 +36,6 @@
             [store removeMatch:[[store allMatches] objectAtIndex:0]];
         }
         
-        [[SDEventStore sharedStore] setHeaderIsShown:NO];
         [[SDEventStore sharedStore] setBuildListTitle:@""];
         [store saveChanges];
         [[self tableView] reloadData];
@@ -54,12 +53,8 @@
             }
         }
         
-        if(([[store allMatches] count] > 0) && ([[[SDEventStore sharedStore] buildListTitle] length] > 0)) {
-            [[SDEventStore sharedStore] setHeaderIsShown:YES];
-        } else {
-            [[SDEventStore sharedStore] setHeaderIsShown:NO];
-        }
-        
+        if ([[store allMatches] count] == 0) [[SDEventStore sharedStore] setBuildListTitle:@""];
+
         [store saveChanges];
         [[self tableView] reloadData];
     }
@@ -71,9 +66,6 @@
     if(self) {
         myTitle = [[SDTitleView alloc] initWithNibName:@"SDTitleView" bundle:nil];
         [[myTitle matchLabel] setText:@""];
-        
-        eventTitle = [[SDEventStore sharedStore] eventTitle];
-        buildListTitle = [[SDEventStore sharedStore] buildListTitle];
         
         if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
             isIOS7 = YES;
@@ -177,17 +169,7 @@
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    BOOL header = [[SDEventStore sharedStore] scoutHeader];
-    BOOL update = [[SDEventStore sharedStore] shouldUpdateHeader];
-    
-    if(header) {
-        if(update && ([[[SDMatchStore sharedStore] allMatches] count] > 0)) {
-            eventTitle = [[SDEventStore sharedStore] eventTitle];
-            [[SDEventStore  sharedStore] updateHeader:NO];
-        }
-        return [NSString stringWithFormat:@"%@:  %@", [eventTitle uppercaseString], [[SDEventStore sharedStore] buildListTitle]];
-    }
-    return @"";
+    return [[SDEventStore sharedStore] buildListTitle];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -214,17 +196,14 @@
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray* matches = [[SDMatchStore sharedStore] allMatches];
     SDMatch *selectedMatch = [matches objectAtIndex:[indexPath row]];
+    SDMatch* selectedMatchCopy = [[SDMatch alloc] initWithCopy:selectedMatch];
     
-    SDMatchSummaryView *newView = [[SDMatchSummaryView alloc] initWithNibName:@"SDMatchSummaryView" bundle:nil];
-    [newView setMatch:selectedMatch];
     [[self navigationController] navigationBar].translucent = NO;
     
     if(selectedMatch.isCompleted == 15) {
-        SDMatch* selectedMatchCopy = [[SDMatch alloc] initWithCopy:selectedMatch];
         [[SDViewServer getInstance] showViewNewIndex:0 oldIndex:-1 matchData:selectedMatch matchCopy:selectedMatchCopy];
         
     } else {
-        SDMatch* selectedMatchCopy = [[SDMatch alloc] initWithCopy:selectedMatch];
         if(selectedMatchCopy.noShow == 1) selectedMatchCopy.isCompleted = 15;
         
         [[SDViewServer getInstance] setIsNewMatch:NO];

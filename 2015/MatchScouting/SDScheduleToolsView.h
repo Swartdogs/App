@@ -12,10 +12,10 @@
 @class SDSchedule;
 
 @interface SDScheduleToolsView : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
-    int buildGroup;
-    NSString* htmlSchedule;
+    int         buildGroup;
+    NSString*   htmlSchedule;
     SDSchedule* scheduleItem;
-    NSString* bufferSelectEvent;
+    NSString*   bufferSelectEvent;
     
     __weak IBOutlet UIButton*    buildButton;
     __weak IBOutlet UIButton*    getStartButton;

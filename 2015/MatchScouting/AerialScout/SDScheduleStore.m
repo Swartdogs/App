@@ -28,12 +28,23 @@
     return newSchedule;
 }
 
+- (int) getSearchTeam {
+    return searchTeam;
+}
+
 - (id) init {
     if(self = [super init]) {
         NSString* path = [self scheduleArchivePath];
         
         allSchedules = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-        if (!allSchedules) allSchedules = [[NSMutableArray alloc] init];
+        
+        if (!allSchedules) {
+            allSchedules = [[NSMutableArray alloc] init];
+            searchTeam = 0;
+            [[NSUserDefaults standardUserDefaults] setInteger:searchTeam forKey:@"SearchTeamPrefKey"];
+        } else {
+            searchTeam = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"SearchTeamPrefKey"];
+        }
     }
     
     return self;
@@ -47,8 +58,15 @@
     return [NSKeyedArchiver archiveRootObject:allSchedules toFile:path];
 }
 
+- (void) setSearchTeam:(int)team {
+    searchTeam = team;
+    [[NSUserDefaults standardUserDefaults] setInteger:searchTeam forKey:@"SearchTeamPrefKey"];
+}
+
 - (void) removeAll {
     [allSchedules removeAllObjects];
+    searchTeam = 0;
+    [[NSUserDefaults standardUserDefaults] setInteger:searchTeam forKey:@"SearchTeamPrefKey"];
 }
 
 - (void) removeSchedule:(SDSchedule *)thisSchedule {

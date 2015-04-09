@@ -71,8 +71,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [commentsLabel setEditable:NO];
+    
     UIScrollView* scrollView = (UIScrollView*)self.view;
-    scrollView.contentSize = CGSizeMake(320, 648);
+    scrollView.contentSize = CGSizeMake(320, 410);
 }
 
 - (void) viewDidUnload {
@@ -81,6 +83,7 @@
     finalPointsLabel            = nil;
     finalPenaltyLabel           = nil;
     finalRobotIssuesLabel       = nil;
+    commentsLabel               = nil;
     
     // Auto
     
@@ -150,6 +153,8 @@
         teleLitterScoredLabel.text      = @"";
         teleCoopertitionLabel.text      = @"";
         
+        commentsLabel.text              = match.finalComments;
+
         return;
     }
     
@@ -198,6 +203,8 @@
     teleContainersScoredLabel.text  = [NSString stringWithFormat:@"%i", match.teleContainersScored];
     teleLitterScoredLabel.text      = [NSString stringWithFormat:@"%i", match.teleLitterScored];
     teleCoopertitionLabel.text      = [NSString stringWithFormat:@"%i", match.teleCoopertition];
+    
+    commentsLabel.text = match.finalComments;
 }
 
 - (void)didReceiveMemoryWarning

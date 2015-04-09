@@ -16,16 +16,10 @@
     NSString*       selectedID;
     NSString*       eventTitle;
     NSString*       buildListTitle;
-    BOOL            scoutHeader;
-    BOOL            updateHeader;
 }
 
 + (SDEventStore*) sharedStore;
 
-- (void)        updateHeader:(BOOL)update;
-- (BOOL)        shouldUpdateHeader;
-- (void)        setHeaderIsShown:(BOOL)shown;
-- (BOOL)        scoutHeader;
 - (void)        setEventTitle:(NSString*)title;
 - (NSString*)   eventTitle;
 - (void)        setBuildListTitle:(NSString*)title;

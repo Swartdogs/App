@@ -13,12 +13,13 @@
 
 @class SDMatch;
 
-@interface SDFinalView : UIViewController <UIAlertViewDelegate, SDResizeStepperViewDelegate> {
+@interface SDFinalView : UIViewController <UIAlertViewDelegate, UITextViewDelegate, SDResizeStepperViewDelegate> {
     SDMatch* match;
     SDMatch* origMatch;
     
     bool keypadShown;
     
+    __weak IBOutlet UITextView*          commentsField;
     __weak IBOutlet UITextField*         finalScoreField;
     __weak IBOutlet UILabel*             scoreFlag;
     __weak IBOutlet SDResizeStepperView* teleCoopertition;

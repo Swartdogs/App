@@ -13,8 +13,6 @@
 @interface SDMatchViewController : UITableViewController <UIActionSheetDelegate> {
     SDTitleView* myTitle;
     bool         toolsShown;
-    NSString*    eventTitle;
-    NSString*    buildListTitle;
 }
 
 - (IBAction)addNewMatch:(id)sender;

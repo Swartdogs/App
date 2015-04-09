@@ -41,6 +41,7 @@
 @property (nonatomic) int finalScore;
 @property (nonatomic) int finalPenalty;
 @property (nonatomic) int finalRobot;
+@property (nonatomic) NSString* finalComments;
 
 + (NSString*) writeHeader;
 

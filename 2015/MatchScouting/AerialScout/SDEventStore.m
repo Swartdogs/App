@@ -13,22 +13,6 @@
 
 @implementation SDEventStore
 
-- (void) updateHeader:(BOOL)update {
-    updateHeader = update;
-}
-
-- (BOOL) shouldUpdateHeader {
-    return updateHeader;
-}
-- (void) setHeaderIsShown:(BOOL)shown {
-    scoutHeader = shown;
-    [[NSUserDefaults standardUserDefaults] setInteger:scoutHeader forKey:@"ScoutHeaderPrefKey"];
-}
-
-- (BOOL) scoutHeader {
-    return scoutHeader;
-}
-
 - (void) setEventTitle:(NSString*)title {
     eventTitle = title;
     [[NSUserDefaults standardUserDefaults] setObject:eventTitle forKey:@"ScoutEventPrefKey"];
@@ -39,7 +23,12 @@
 }
 
 - (void) setBuildListTitle:(NSString*)title {
-    buildListTitle = title;
+    if ([title length] > 0) {
+        buildListTitle =  [NSString stringWithFormat:@"%@: %@", [eventTitle uppercaseString], title];
+    } else {
+        buildListTitle = @"";
+    }
+
     [[NSUserDefaults standardUserDefaults] setObject:buildListTitle forKey:@"ScoutBuildTitlePrefKey"];
 }
 
@@ -88,11 +77,6 @@
         
         buildListTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutBuildTitlePrefKey"];
         if(!buildListTitle) buildListTitle = @"";
-        
-        scoutHeader = [[NSUserDefaults standardUserDefaults] integerForKey:@"ScoutHeaderPrefKey"];
-        if(!scoutHeader) scoutHeader = NO;
-        
-        updateHeader = NO;
         
         [self buildEventList];
     }

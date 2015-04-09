@@ -20,8 +20,8 @@
 @interface SDScheduleToolsView () {
     NSString* findEventID;
 }
-- (void) buildMatchList;
-- (void) selectIndex:(int)index fromArray:(NSArray*)array;
+- (void)   buildMatchList;
+- (void)   selectIndex:(int)index fromArray:(NSArray*)array;
 - (NSURL*) smartURLForString:(NSString*)str;
 - (void)   stopGetWithStatus:(NSString*)status;
 
@@ -37,18 +37,19 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag == 1) {
         if(buttonIndex == 0) {
-            [self buildMatchList];
+            [getStatusLabel setText:@"Building List..."];
+            [showActivity startAnimating];
+            [getStartButton setEnabled:NO];
+            [buildButton setEnabled:NO];
+            [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+
+            [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(buildMatchList) userInfo:nil repeats:NO];
         }
     }
 }
 
 - (void) buildMatchList {
     SDMatch* newMatch;
-    
-    [showActivity startAnimating];
-    [getStartButton setEnabled:NO];
-    [buildButton setEnabled:NO];
-    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
     
     SDMatchStore* matchStore = [SDMatchStore sharedStore];
     SDScheduleStore* scheduleStore = [SDScheduleStore sharedStore];
@@ -76,9 +77,15 @@
     
     [matchStore saveChanges];
     
+    if ([[[SDMatchStore sharedStore] allMatches] count] > 0) {
+        if(buildGroup < 3) {
+            [[SDEventStore sharedStore] setBuildListTitle: [NSString stringWithFormat:@"Red %d", buildGroup + 1]];
+        } else {
+            [[SDEventStore sharedStore] setBuildListTitle: [NSString stringWithFormat:@"Blue %d", buildGroup - 2]];
+        }
+    }
+    
     [getStatusLabel setText:@"Build Completed"];
-    [[SDEventStore sharedStore] setHeaderIsShown:YES];
-    [[SDEventStore sharedStore] updateHeader:YES];
     [showActivity stopAnimating];
     [getStartButton setEnabled:NO];
     [buildButton setEnabled:(buildGroup >= 0)];
@@ -96,74 +103,59 @@
 }
 
 - (void) connection:(NSURLConnection*)theConnection didReceiveData:(NSData *)data {
-    static int  dataIndex = 0;
     NSRange     dataRange;
-    static bool isScheduleItem = NO;
+    NSString*   dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    htmlSchedule = [htmlSchedule stringByAppendingString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+    dataString = [[dataString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]
+                  componentsJoinedByString:@" "];
+
+    htmlSchedule = [htmlSchedule stringByAppendingString: dataString];
     
-    NSArray* replies = [htmlSchedule componentsSeparatedByString:@"\n"];
+    NSArray* replies = [htmlSchedule componentsSeparatedByString:@"</tr>"];
     int replyCount = (int)[replies count] - 1;
     
     NSString* lastReply = [replies objectAtIndex:replyCount];
-    
     if([lastReply length] == 0) replyCount--;
+
     htmlSchedule = lastReply;
     
     for(int i = 0; i < replyCount; i++) {
         NSString* dataItem = [replies objectAtIndex:i];
+        dataRange = [dataItem rangeOfString:@"<tr>" options:NSRegularExpressionSearch];
         
-        if(!isScheduleItem) {
-            // Look for start of Schedule Item
+        if (dataRange.location != NSNotFound) {
+            dataItem = [dataItem substringFromIndex:dataRange.location];
+            NSArray* fields = [dataItem componentsSeparatedByString:@"</td>"];
             
-            dataRange = [dataItem rangeOfString:@"<TR" options:NSRegularExpressionSearch];
-            
-            if(dataRange.length > 0) {
-                isScheduleItem = YES;
-                dataIndex = 0;
+            if (fields.count >= 8) {
                 scheduleItem = [[SDScheduleStore sharedStore] createSchedule];
-            }
-        } else {
-            // Look for Data in Schedule Item
-            
-            dataRange = [dataItem rangeOfString:@"</TR>" options:NSRegularExpressionSearch];
-            
-            if(dataRange.length > 0) {
-                isScheduleItem = NO;
-                
-                if(dataIndex < 8) {
-                    NSLog(@"Schedule Read Error");
-                    [[SDScheduleStore sharedStore] removeSchedule:scheduleItem];
-                }
-                
-                scheduleItem = nil;
-            } else {
-            
-                dataRange = [dataItem rangeOfString:@"<TD.*TD>" options:NSRegularExpressionSearch];
-            
-                if(dataRange.length > 0) {
-                // Look for Data Value
-                
-                    dataRange = [dataItem rangeOfString:@">.*<" options:NSRegularExpressionSearch];
-                
-                    if(dataRange.length > 0) {
-                    // Extract Data Value
+               
+                for (int i = 0; i < 8; i++) {
+                    dataItem = [fields objectAtIndex:i];
                     
-                        dataRange.location++;
-                        dataRange.length = dataRange.length - 2;
-                        dataItem = [dataItem substringWithRange:dataRange];
-                        dataIndex++;
+                    while ((dataRange = [dataItem rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+                        dataItem = [dataItem stringByReplacingCharactersInRange:dataRange withString:@""];
+
+                    dataItem = [dataItem stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" ()"]];
+//                    NSLog(@"Field=%@", dataItem);
                     
-                        switch (dataIndex) {
-                            case 1: scheduleItem.matchTime = dataItem; break;
-                            case 2: scheduleItem.matchNumber = [dataItem intValue]; break;
-                            case 3: scheduleItem.teamRed1 = [dataItem intValue]; break;
-                            case 4: scheduleItem.teamRed2 = [dataItem intValue]; break;
-                            case 5: scheduleItem.teamRed3 = [dataItem intValue]; break;
-                            case 6: scheduleItem.teamBlue1 = [dataItem intValue]; break;
-                            case 7: scheduleItem.teamBlue2 = [dataItem intValue]; break;
-                            case 8: scheduleItem.teamBlue3 = [dataItem intValue]; break;
-                        }
+                    switch (i) {
+                        case 0: scheduleItem.matchNumber = [dataItem intValue];
+                                break;
+                        case 1: scheduleItem.matchTime = [dataItem substringFromIndex:4];
+                                break;
+                        case 2: scheduleItem.teamRed1 = [dataItem intValue];
+                                break;
+                        case 3: scheduleItem.teamRed2 = [dataItem intValue];
+                                break;
+                        case 4: scheduleItem.teamRed3 = [dataItem intValue];
+                                break;
+                        case 5: scheduleItem.teamBlue1 = [dataItem intValue];
+                                break;
+                        case 6: scheduleItem.teamBlue2 = [dataItem intValue];
+                                break;
+                        case 7: scheduleItem.teamBlue3 = [dataItem intValue];
+                                break;
                     }
                 }
             }
@@ -303,12 +295,14 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    }
+    
     SDTitleView* myTitle = [[SDTitleView alloc] initWithNibName:@"SDTitleView" bundle:nil];
     self.navigationItem.titleView = myTitle.view;
     [[myTitle matchLabel] setText:@"Tools"];
     
-    //NSString* eventID = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutEventIdPrefKey"];
-
     [getStartButton setEnabled:NO];
     
     buildGroup = -1;
@@ -331,7 +325,14 @@
         
         alertView.tag = 1;
         [alertView show];
+    
     } else {
+        [getStatusLabel setText:@"Building List..."];
+        [showActivity startAnimating];
+        [getStartButton setEnabled:NO];
+        [buildButton setEnabled:NO];
+        [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+
         [self buildMatchList];
     }
 }
@@ -340,11 +341,6 @@
     [getStatusLabel setText:@""];
     
     int index = (int)[sender tag];
-    if(index < 3) {
-        [[SDEventStore sharedStore] setBuildListTitle:[NSString stringWithFormat:@"Red %d", index+1]];
-    } else {
-        [[SDEventStore sharedStore] setBuildListTitle:[NSString stringWithFormat:@"Blue %d", index-2]];
-    }
     buildGroup = index;
     [self selectIndex:index fromArray:buildListButtons];
     [buildButton setEnabled:(buildGroup >= 0)];
@@ -369,9 +365,9 @@
         urlPath = nil;
     } else {
     
-        NSString* url = @"http://www2.usfirst.org/2015comp/events/";
+        NSString* url = @"http://frc-events.usfirst.org/2015/";
         url = [url stringByAppendingString:[[SDEventStore sharedStore] selectedID]];
-        url = [url stringByAppendingString:@"/schedulequal.html"];
+        url = [url stringByAppendingString:@"/qualifications"];
         urlPath = [self smartURLForString:url];
         
     }

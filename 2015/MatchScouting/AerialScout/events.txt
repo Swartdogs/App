@@ -97,7 +97,7 @@
 4|New England|Hartford|Hartford Public High School|Hartford, CT|3/28/15|CTHAR
 4|New England|District Championship|WPI-Sports and Recreation Center|Worcester, MA|4/9/15|NECMP
 5|Pacific Northwest|Auburn Mountainview|Auburn Mountainview High School|Auburn, WA|2/27/15|WAAMV
-5|Pacific Northwest|Oregon City|Clackamas Academy of Industrial Science|Oregon City, OR|2/17/15|ORORE
+5|Pacific Northwest|Oregon City|Clackamas Academy of Industrial Science|Oregon City, OR|2/27/15|ORORE
 5|Pacific Northwest|West Valley|West Valley High School|Spokane, WA|3/6/15|WASPO
 5|Pacific Northwest|Glacier Peak|Glacier Peak High School|Snohomish, WA|3/7/15|WASNO
 5|Pacific Northwest|Wilsonville|Wilsonville High School|Wilsonville, OR|3/13/15|ORWIL
@@ -107,4 +107,8 @@
 5|Pacific Northwest|Auburn|Auburn High School|Auburn, WA|3/27/15|WAAHS
 5|Pacific Northwest|Philomath|Philomath High School|Philomath, OR|3/27/15|ORPHI
 5|Pacific Northwest|District Championship|Eastern Washington University|Cheney, WA|4/2/15|PNCMP
-6|Championship|Archimedes|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Archimedes6|Championship|Curie|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Curie6|Championship|Galileo|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Galileo6|Championship|Newton|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Newton
+6|Championship|Archimedes|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Archimedes6|Championship|Carson|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Carson
+6|Championship|Carver|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Carver
+6|Championship|Curie|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Curie6|Championship|Galileo|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Galileo6|Championship|Hopper|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Hopper
+6|Championship|Newton|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Newton
+6|Championship|Tesla|Edward Jones Dome|St. Louis, MO, USA|4/22/15|Tesla

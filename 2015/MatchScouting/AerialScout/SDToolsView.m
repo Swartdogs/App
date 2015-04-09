@@ -29,7 +29,7 @@
     UIBarButtonItem* doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(quitTools:)];
     
     [[self navigationItem] setRightBarButtonItem:doneItem animated:NO];
-    
+
     fileUpload = [[SDFileUpload alloc] init];
     
     return self;
@@ -135,9 +135,13 @@
     
     self.navigationController.navigationBar.translucent = NO;
     
+    if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    }
+    
     SDTitleView* myTitle = [[SDTitleView alloc] initWithNibName:@"SDTitleView" bundle:nil];
     self.navigationItem.titleView = myTitle.view;
-    [[myTitle matchLabel] setText:@"File Upload"];
+   [[myTitle matchLabel] setText:@"File Upload"];
     
     NSString* hostName = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutHostPrefKey"];
     NSString* userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScoutUserNamePrefKey"];
